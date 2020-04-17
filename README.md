@@ -15,7 +15,7 @@ Le logiciel d'emploi du temps que vous connaissez permet de faire remonter des q
 - Loïc: Modèle relationelle
 
 - //vieul
--//iymhnc8d
+- //iymhnc8d
 
 
  L'application devrait permettre : 
