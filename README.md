@@ -7,3 +7,46 @@ Le logiciel d'emploi du temps que vous connaissez permet de faire remonter des q
 ###### RAZAFINDRABE Noah
 ###### CENCI Thomas
 ###### LABIDOUILLE Joe
+
+## Ideas
+- Rémi: Recherche edt/ req
+- Noah: Base du site  (affichage, structure)
+- Thomas: Bootstrap / git
+- Loïc: Modèle relationelle
+
+- //vieul
+-//iymhnc8d
+
+
+ L'application devrait permettre : 
+     
+- de choisir des critères d'extraction des données et pouvoir les combiner (exemple : ressource APP-IAI et ressource Jean-Jacques Curtelin présentes dans l'activité) 
+
+- d'extraire les données en question depuis ADE et les stocker dans une base de données en vue de leur exploitation (comptabilité des heures...) 
+
+- d'effectuer des requêtes sur la base de données selon les critères choisis.
+
+
+
+
+Idées
+
+ - bouton ajouter activité -> affiche formulaire (nom activité, type : CC, conférence, sortie, ...), description, promotion, date, heure_début, heure_fin) (+ proposition automatique d'ajout, calcul date et heure qui conviennent pour l'enseignant et la promotion) 
+ -bouton modifier activité
+ -bouton supprimer activité
+
+- connexion en mode enseignant :
+    -ajout de conférence en renseignant les salles disponibles, les heures disponibles, les étudiants conviés, etc...
+
+-connexion en mode etudiant:
+    -demande de modification de créneau
+    -demande de réservation de salle
+    
+    
+    
+    
+
+EDT.php?page=
+
+page1 :  connexion
+page2: EDT
