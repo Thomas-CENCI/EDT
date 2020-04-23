@@ -1,0 +1,13 @@
+body{
+  background-color: #F2F2F2;
+}
+
+div#connexion_block{
+  background-color : #FFFFFF;
+  border-radius: 4px;
+  width: 20%;
+  border-style: solid;
+  border-color: #cccccc;
+  border-width: 2px;
+
+}

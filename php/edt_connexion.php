@@ -1,15 +1,16 @@
 <?php
 	session_start();
 
-	$mysql_user = "vieul";
-    $mysql_passwd = "iymhnc8d";
+	$mysql_user = "root";
+    $mysql_passwd = "root";
     
-    $conn = mysql_connect("tp-epu:3308", $mysql_user, $mysql_passwd) or die("Impossible de se connecter : ". mysql_error());
+    /*$conn = mysql_connect("localhost:8889", $mysql_user, $mysql_passwd) or die("Impossible de se connecter : ". mysql_error());
     
     mysql_select_db($mysql_user, $conn)or die("Impossible de sélectionner la base: ". mysql_error());
     
-    mysql_query("SET NAMES UTF8");
+    mysql_query("SET NAMES UTF8"); /*
 
+    /*
     if(isset($_POST["connexion_bouton"])){
     	if($_POST['login']!="" && $_POST['password']!=""){
 	    	$requete_sql="SELECT motsDePasse FROM utilisateur WHERE  	identifiant LIKE '" . $_POST['login'] . "'";
@@ -30,6 +31,7 @@
 	    	$acces_denied = True;
     	}
     }
+    */
 
 ?>
 
@@ -39,21 +41,31 @@
 		<title>EDT - connexion </title>
 		<meta content="info">
     	<meta charset="UTF-8">
-    	<link rel="stylesheet" href="edt_connexion.css" />
+    	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    	<link href="edt_connexion.css" rel="stylesheet">
 	</head>
+
 	<body>
 
-	<h1>Bienvenue sur votre site de gestion d'emploi du temps</h1>
+	<h2>Bienvenue sur votre site de gestion d'emploi du temps</h2>
 
-	<form id="connexion" action="" method="POST">
-		<span id="titre">Connexion à EDT </span>
-		<input type="text" name="login" value="" placeholder="Nom d'utilisateur">
-		<input type="password" name="password" value="" placeholder="Mot de passe">
-		<?php if (isset($acces_denied)): ?>
-			<div id="msg_error">Le nom d'utilisateur ou le mot de passe est incorrect, veuillez réessayer </div>
-		<?php endif; ?>
-		<input type="submit" name="connexion_bouton" value="connexion">
-	</form>
+	<div class="row">
+		<div class="col">
+		</div>
+		<div id="connexion_block" class="col">
+			<form id="connexion" action="" method="POST">
+				<span id="titre">Connexion à EDT </span></br>
+				<input type="text" name="login" value="" placeholder="Nom d'utilisateur"></br>
+				<input type="password" name="password" value="" placeholder="Mot de passe"></br>
+				<!-- <?php if (isset($acces_denied)): ?> -->
+					<!-- <div id="msg_error">Le nom d'utilisateur ou le mot de passe est incorrect, veuillez réessayer </div> -->
+				<!-- <?php endif; ?> -->
+				<input type="submit" name="connexion_bouton" value="connexion">
+			</form>
+		</div>
+		<div class="col">
+		</div>
+	</div>
 	
 
 	</body>
