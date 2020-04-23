@@ -12,14 +12,15 @@
 
     if(isset($_POST["connexion_bouton"])){
     	if($_POST['login']!="" && $_POST['password']!=""){
-	    	$requete_sql="SELECT mot_de_passe FROM user WHERE login LIKE '" . $_POST['login'] . "'";
+	    	$requete_sql="SELECT motsDePasse FROM utilisateur WHERE  	identifiant LIKE '" . $_POST['login'] . "'";
 	    	$result = mysql_query($requete_sql) or die("Requête invalide: ". mysql_error()."\n".$requete_sql);
 	    	$data = mysql_fetch_row($result);
+	    	
 	    	if($data[0]==$_POST['password']){
 	    		$_SESSION['login']=$_POST['login'];
 	    		$_SESSION['password']=$_POST['password'];
 	    		$access_granted = True;
-	    		header('Location : EDT.php') /*redirection*/
+	    		header('Location : EDT.php'); /*redirection*/
 	    	}
 	    	else{
 	    		$acces_denied = True;
@@ -51,7 +52,7 @@
 		<?php if (isset($acces_denied)): ?>
 			<div id="msg_error">Le nom d'utilisateur ou le mot de passe est incorrect, veuillez réessayer </div>
 		<?php endif; ?>
-		<input type="submit" name="connexion_bouton" value="connexion_pressed">
+		<input type="submit" name="connexion_bouton" value="connexion">
 	</form>
 	
 
