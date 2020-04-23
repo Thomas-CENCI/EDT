@@ -1,3 +1,6 @@
+<?php
+session_start();
+ ?>
 <!DOCTYPE HTML>
 
 <html>
@@ -7,17 +10,40 @@
     <meta content="info">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="EDT.css" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
   </head>
   
   <body>
-  
-  <div id="fond">
-  
-    <div id="titre">
-      <h1 style="text-align: center;">EDT</span>
-    </div>
-  
-    <div id="menu">
+    
+      <div class="row">
+          <div class="col-lg-6">
+            <ul id="menu-accordeon">
+             <li><a href="#">|||</a>
+            <ul>
+               <li><a href="#">lien sous menu 1</a></li>
+               <li><a href="#">lien sous menu 1</a></li>
+               <li><a href="#">lien sous menu 1</a></li>
+               <li><a href="#">lien sous menu 1</a></li>
+            </ul></ul></li>
+          </div>
+
+          <div class="col-lg-6">
+            <h1>EDT</span></h1>
+          </div>
+
+        </div>
+   
+
+
+
+
+
+
+
+      <div id="menu">
 
     </div>
   

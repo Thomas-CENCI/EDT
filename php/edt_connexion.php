@@ -20,7 +20,7 @@
 	    		$_SESSION['login']=$_POST['login'];
 	    		$_SESSION['password']=$_POST['password'];
 	    		$access_granted = True;
-	    		header('Location : EDT.php'); /*redirection*/
+	    		header ('Location: EDT.php');
 	    	}
 	    	else{
 	    		$acces_denied = True;
