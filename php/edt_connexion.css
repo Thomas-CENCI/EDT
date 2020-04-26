@@ -5,9 +5,28 @@ body{
 div#connexion_block{
   background-color : #FFFFFF;
   border-radius: 4px;
-  width: 20%;
   border-style: solid;
   border-color: #cccccc;
   border-width: 2px;
 
+}
+
+.vertical-center {
+  min-height: 90%; /*some browser does not support vh*/
+  min-height: 90vh;
+
+  display: flex;
+  align-items: center;
+}
+
+div.form-group {
+	margin: 15px;
+}
+
+div.form-bottom{
+	margin-bottom:20px;
+}
+
+div.form-top{
+	margin-top:20px;
 }

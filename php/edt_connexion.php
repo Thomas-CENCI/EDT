@@ -1,16 +1,24 @@
 <?php
 	session_start();
 
-	$mysql_user = "root";
-    $mysql_passwd = "root";
-    
-    /*$conn = mysql_connect("localhost:8889", $mysql_user, $mysql_passwd) or die("Impossible de se connecter : ". mysql_error());
-    
-    mysql_select_db($mysql_user, $conn)or die("Impossible de sélectionner la base: ". mysql_error());
-    
-    mysql_query("SET NAMES UTF8"); /*
+    $user = 'root';
+	$password = 'root';
+	$db = 'inventory';
+	$host = 'localhost';
+	$port = 8889;
 
-    /*
+	/*$link = mysqli_init();*/
+	/*$success = mysqli_real_connect($link, $host, $user, $password, $db, $port);*/
+
+	/*if (mysqli_connect_error()) {
+    	die('Connect Error ('.mysqli_connect_errno().') '.mysqli_connect_error());
+  	}
+
+  	echo 'Connected successfully.';
+
+    mysql_query("SET NAMES UTF8");*/
+
+    
     if(isset($_POST["connexion_bouton"])){
     	if($_POST['login']!="" && $_POST['password']!=""){
 	    	$requete_sql="SELECT motsDePasse FROM utilisateur WHERE  	identifiant LIKE '" . $_POST['login'] . "'";
@@ -31,8 +39,8 @@
 	    	$acces_denied = True;
     	}
     }
-    */
-
+    
+   	/*$mysqli->close();*/
 ?>
 
 <!DOCTYPE html>
@@ -47,23 +55,46 @@
 
 	<body>
 
-	<h2>Bienvenue sur votre site de gestion d'emploi du temps</h2>
+	<div class="vertical-center">
+		<div class="container">
+			<!-- Alert message if didn't success to sign in -->
+			<?php if (isset($acces_denied)): ?>
+				<div class="row justify-content-center">
+					<div class="col-4">
+						<div class="alert alert-warning" role="alert">
+	 						 A simple warning alert—check it out!
+						</div>
+					</div>
+				</div>
+			<?php endif; ?>
 
-	<div class="row">
-		<div class="col">
-		</div>
-		<div id="connexion_block" class="col">
-			<form id="connexion" action="" method="POST">
-				<span id="titre">Connexion à EDT </span></br>
-				<input type="text" name="login" value="" placeholder="Nom d'utilisateur"></br>
-				<input type="password" name="password" value="" placeholder="Mot de passe"></br>
-				<!-- <?php if (isset($acces_denied)): ?> -->
-					<!-- <div id="msg_error">Le nom d'utilisateur ou le mot de passe est incorrect, veuillez réessayer </div> -->
-				<!-- <?php endif; ?> -->
-				<input type="submit" name="connexion_bouton" value="connexion">
-			</form>
-		</div>
-		<div class="col">
+			<div class="row">
+				<div class="col-4">
+				</div> 
+				<div class="col-4">
+					<div id="connexion_block">
+							<form id="connexion" action="" method="POST">
+								<div class="form-group form-top text-center">
+									<label class="font-weight-bold">Connexion à EDT </label>
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" name="login" value="" placeholder="Nom d'utilisateur">
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control" name="password" value="" placeholder="Mot de passe">
+								</div>
+								<!-- <?php if (isset($acces_denied)): ?> -->
+									<!-- <div id="msg_error">Le nom d'utilisateur ou le mot de passe est incorrect, veuillez réessayer </div> -->
+								<!-- <?php endif; ?> -->
+								<div class="form-group form-bottom">
+									<input type="submit"  class="form-control btn btn-outline-primary" name="connexion_bouton" value="Connexion">
+								</div>
+							</form>
+					</div>
+				</div>
+				<div class="col-4">
+				</div> 
+			</div>
 		</div>
 	</div>
 	
