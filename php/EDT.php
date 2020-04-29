@@ -17,16 +17,16 @@ session_start();
   </head>
   
   <body>
-    
+
       <div class="row">
           <div class="col-lg-6">
             <ul id="menu-accordeon">
              <li><a href="#">|||</a>
             <ul>
                <li><a href="#">lien sous menu 1</a></li>
-               <li><a href="#">lien sous menu 1</a></li>
-               <li><a href="#">lien sous menu 1</a></li>
-               <li><a href="#">lien sous menu 1</a></li>
+               <li><a href="#">lien sous menu 2</a></li>
+               <li><a href="#">lien sous menu 3</a></li>
+               <li><a href="#">lien sous menu 4</a></li>
             </ul></ul></li>
           </div>
 
@@ -36,13 +36,6 @@ session_start();
 
         </div>
    
-
-
-
-
-
-
-
       <div id="menu">
 
     </div>
