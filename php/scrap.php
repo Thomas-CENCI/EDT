@@ -40,10 +40,15 @@
 
 	function drop_event($id){
 		echo $id;
-		$hostname = "localhost:8889";
-		$username="root";
-		$password="root";
-		$db="gosselre";
+		$hostname = "sql7.freemysqlhosting.net:3306";
+		$username="sql7336475";
+		$password="ItBWtR3xM5";
+		$db="sql7336475";
+
+		// $hostname = "localhost:8889";
+		// $username="root";
+		// $password="root";
+		// $db="sql7336475";
 		$conn = new mysqli($hostname, $username, $password, $db) or die('Error connecting to database');
 
 		$sql = "DELETE FROM events WHERE id=".$id;
@@ -51,16 +56,21 @@
 	}
 
 	function add_event($event){
-		$hostname = "localhost:8889";
-		$username="root";
-		$password="root";
-		$db="gosselre";
+		$hostname = "sql7.freemysqlhosting.net:3306";
+		$username="sql7336475";
+		$password="ItBWtR3xM5";
+		$db="sql7336475";
+
+		// $hostname = "localhost:8889";
+		// $username="root";
+		// $password="root";
+		// $db="sql7336475";
 		$conn = new mysqli($hostname, $username, $password, $db) or die('Error connecting to database');
 
 		$dtstart = convert_to_datetime($event['DTSTART']);
 		$dtend = convert_to_datetime($event['DTEND']);
 
-		$stmt = $conn->prepare("INSERT INTO gosselre.events (DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION) VALUES (?, ?, ?, ?, ?)");
+		$stmt = $conn->prepare("INSERT INTO sql7336475.events (DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION) VALUES (?, ?, ?, ?, ?)");
 		$stmt->bind_param('sssss', $dtstart, $dtend, $event['SUMMARY'], $event['LOCATION'], $event['DESCRIPTION']);
 
 		if ($stmt->execute()){
@@ -72,13 +82,18 @@
 	}
 
 	function update_bd($events){
-		$hostname = "localhost:8889";
-		$username="root";
-		$password="root";
-		$db="gosselre";
+		$hostname = "sql7.freemysqlhosting.net:3306";
+		$username="sql7336475";
+		$password="ItBWtR3xM5";
+		$db="sql7336475";
+		
+		// $hostname = "localhost:8889";
+		// $username="root";
+		// $password="root";
+		// $db="sql7336475";
 		$conn = new mysqli($hostname, $username, $password, $db) or die('Error connecting to database');
 
-		$sql = "SELECT * FROM gosselre.events";
+		$sql = "SELECT * FROM sql7336475.events";
 		$response = mysqli_query($conn, $sql);
 		$result = mysqli_fetch_all($response, MYSQLI_ASSOC);
 
@@ -99,14 +114,14 @@
 			if(in_array(convert_to_datetime($event['DTSTART']), $all_dtstrat)){
 				foreach ($result as $bd_event){
 					if ($bd_event['DTSTART'] == convert_to_datetime($event['DTSTART'])){
-						if (!($bd_event['SUMMARY'] == $event['SUMMARY'] && $bd_event['DESCRIPTION'] == $event['DESCRIPTION'])){
+						if (!($bd_event['SUMMARY'] == $event['SUMMARY'] && $bd_event['DESCRIPTION'] == $event['DESCRIPTION']) && strtotime($current_datetime) < strtotime(convert_to_datetime($event['DTEND']) ) ){
 							//Not the same event
 							add_event($event);
 						}
 					}
 				}
 			}
-			else{
+			else if (strtotime($current_datetime) < strtotime(convert_to_datetime($event['DTEND']) ) ){
 				add_event($event);
 			}
 		}
