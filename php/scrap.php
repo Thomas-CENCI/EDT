@@ -86,7 +86,7 @@
 		$username="sql7336475";
 		$password="ItBWtR3xM5";
 		$db="sql7336475";
-		
+
 		// $hostname = "localhost:8889";
 		// $username="root";
 		// $password="root";
@@ -111,7 +111,7 @@
 		}
 
 		foreach ($events as $event) {
-			if(in_array(convert_to_datetime($event['DTSTART']), $all_dtstrat)){
+			if(in_array(convert_to_datetime($event['DTSTART']), $all_dtstrat)){//Two different events but with same DTSTART
 				foreach ($result as $bd_event){
 					if ($bd_event['DTSTART'] == convert_to_datetime($event['DTSTART'])){
 						if (!($bd_event['SUMMARY'] == $event['SUMMARY'] && $bd_event['DESCRIPTION'] == $event['DESCRIPTION']) && strtotime($current_datetime) < strtotime(convert_to_datetime($event['DTEND']) ) ){
