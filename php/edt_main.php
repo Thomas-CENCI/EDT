@@ -57,8 +57,8 @@
 		<div class="container content">
 
 			<?php
-        		if(file_exists("page".$page.".inc.php") ){ 
-         		 include("page".$page.".inc.php");
+        		if(file_exists("page".$page.".php") ){ 
+         		 include("page".$page.".php");
         		}
       		?>
 

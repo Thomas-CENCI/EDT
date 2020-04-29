@@ -11,27 +11,28 @@ $password="ItBWtR3xM5";
 $db="sql7336475";
 $conn = new mysqli($hostname, $username, $password, $db) or die('Error connecting to database');
 
-$SQL_nom = ("SELECT identifiant FROM cours");
-$requete_nom = mysql_query($SQL_nom);
+$SQL_nom = "SELECT identifiant FROM cours";
+$requete_nom = mysqli_query($conn, $SQL_nom);
 
-$SQL_module = ("SELECT identifiant FROM modules");
-$requete_module = mysql_query($SQL_module);
+$SQL_module = "SELECT identifiant FROM modules";
+$requete_module = mysqli_query($conn, $SQL_module);
 
 // $duree = 
 
-$SQL_enseignant = ("SELECT identifiant FROM user WHERE type LIKE 'type de l'enseignant");
-$requete_enseignant = mysql_query($SQL_enseignant);
+$SQL_enseignant = "SELECT identifiant FROM user WHERE type LIKE 'type de l'enseignant";
+$requete_enseignant = mysqli_query($conn, $SQL_enseignant);
 
-$SQL_salle = ("SELECT identifiant FROM salles");
-$requete_salle = mysql_query($SQL_salle);
+$SQL_salle = "SELECT identifiant FROM salles";
+$requete_salle = mysqli_query($conn, $SQL_salle);
 
 // $date = 
 
-$SQL_groupe = ("SELECT identifiant FROM groupe");
-$requete_groupe = mysql_query($SQL_groupe);
+$SQL_groupe = "SELECT identifiant FROM groupe";
+$requete_groupe = mysqli_query($conn, $SQL_groupe);
 
 ?>
 
+<!DOCTYPE html>
 <html>
 	<head>
 		<h1 style="text-align: center;">Demande de création d'un évennement - ENSEIGNANT</h1>
@@ -39,121 +40,101 @@ $requete_groupe = mysql_query($SQL_groupe);
 		<link rel='stylesheet' href='page3.css'>
 	</head>
 	<div>
-		<nav>
-			<ul>
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    	Nom de l'évennement
-				  	</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		<form id='data' action='page1.php' method='GET'>
+			<div class="dropdown">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    	Nom de l'évennement
+			  	</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-						<?php
-						while($data_nom = mysql_fetch_array($requete_nom)){
-							$nom = $data_nom['nom'];
-							echo("<a class = 'dropdownitem' href = '#'> ".$nom." </a>")
-				    	?>
+					<?php
+					while($data_nom = mysqli_fetch_array($requete_nom)){
+						$nom = $data_nom['nom'];
+						echo("<button class = 'dropdownitem' type = 'submit'> ".$nom." </button>");
+					}
+			    	?>
 
-				  	</div>
-				</div>
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    	Nom du module
-				  	</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			  	</div>
 
-						<?php
-				    	while($data_module = mysql_fetch_array($requete_module)){
-							$module = $data_module['nom'];
-							echo("<a class = 'dropdownitem' href = '#'> ".$module." </a>")
-				    	?>
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    	Nom du module
+			  	</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-				  	</div>
-				</div>
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    	Durée de l'évennement
-				  	</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<?php
+			    	while($data_module = mysqli_fetch_array($requete_module)){
+						$module = $data_module['nom'];
+						echo("<button class = 'dropdownitem' type = 'submit'> ".$module." </button>");
+					}
+			    	?>
 
-						<?php
-						echo("<a class = 'dropdownitem' href = '#'> ".$duree." </a>")
-				    	?>
+			  	</div>
 
-				  	</div>
-				</div>
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    	Nom de l'enseignant
-				  	</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    	Durée de l'évennement
+			  	</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-						<?php
-				    	while($data_enseignant = mysql_fetch_array($requete_enseignant)){
-							$enseignant = $data_enseignant['nom'];
-							echo("<a class = 'dropdownitem' href = '#'> ".$enseignant." </a>")
-				    	?>
+					<?php
+					echo("<button class = 'dropdownitem' type = 'submit'> ".$duree." </button>");
+			    	?>
 
-				  	</div>
-				</div>
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    	Nom de la salle
-				  	</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			  	</div>
 
-						<?php
-				    	while($data_sale = mysql_fetch_array($requete_salle)){
-							$salle = $data_salle['nom'];
-							echo("<a class = 'dropdownitem' href = '#'> ".$salle." </a>")
-				    	?>
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    	Nom de l'enseignant
+			  	</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-				  	</div>
-				</div>
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    	Date de l'évennement
-				  	</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<?php
+			    	while($data_enseignant = mysqli_fetch_array($requete_enseignant)){
+						$enseignant = $data_enseignant['nom'];
+						echo("<button class = 'dropdownitem' type = 'submit'> ".$enseignant." </button>");
+					}
+			    	?>
 
-						<?php
-						echo("<a class = 'dropdownitem' href = '#'> ".$date." </a>")
-				    	?>
+			  	</div>
 
-				  	</div>
-				</div>
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    	Groupe(s) concerné(s)
-				  	</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    	Nom de la salle
+			  	</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-						<?php
-				    	while($data_groupe = mysql_fetch_array($requete_groupe)){
-							$groupe = $data_groupe['nom'];
-							echo("<a class = 'dropdownitem' href = '#'> ".$salle." </a>")
-				    	?>
+					<?php
+			    	while($data_sale = mysqli_fetch_array($requete_salle)){
+						$salle = $data_salle['nom'];
+						echo("<button class = 'dropdownitem' type = 'submit'> ".$salle." </button>");
+					}
+			    	?>
 
-				  	</div>
-				</div>
-			</ul>
-		</nav>
-	</div>
+			  	</div>
 
-	<?php
-		// récupérer les données renseignées.
-	?>
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    	Date de l'évennement
+			  	</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-	<div>
-		<h1 style="text-align: center"></h1>
-		<div>
-			<form id='capteur_f' action='page1.php' method='GET' onsubmit='return validate()'>
-				<input type="text" name="nom" id="nom" readonly="readonly" value=<?php echo $nom; ?>>
-				<input type="text" name="module" id="module" value=<?php echo $module; ?>>
-				<input type="text" name="durée" id="durée" value=<?php echo $duree; ?>>
-				<input type="text" name="enseignant" id="enseignant" value=<?php echo $enseignant; ?>>
-				<input type="text" name="date" id="date" value=<?php echo $date; ?>>
-				<input type="text" name="groupe" id="groupe" value=<?php echo $groupe; ?>>
-				<p><input type="submit" value="Valider" style="float: right; width: 25%;"></p>
-			</form>
+					<?php
+					echo("<button class = 'dropdownitem' type = 'submit'> ".$date." </button>");
+			    	?>
+
+			  	</div>
+
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    	Groupe(s) concerné(s)
+			  	</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+					<?php
+			    	while($data_groupe = mysqli_fetch_array($requete_groupe)){
+						$groupe = $data_groupe['nom'];
+						echo("<button class = 'dropdownitem' type = 'submit'> ".$salle." </button>");
+					}
+			    	?>
+
+			  	</div>
+			</div>
+			<p><input type="submit" value="Valider" style="float: right; width: 25%;"></p>
+		</form>
 	</div>
 </html>

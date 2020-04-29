@@ -82,6 +82,12 @@ session_start();
     	</style>
 		<table>
 			<?php
+          $hostname = "localhost:8889";
+          $username="root";
+          $password="";
+          $db="name";
+          $conn = new mysqli($hostname, $username, $password, $db) or die('Error connecting to database');
+          
 			    $jour = array(null, "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
 			    $rdv["Lundi"]["9:30"] = "Maths";
 			    echo "<tr><th>Heure</th>";
