@@ -1,7 +1,7 @@
 <style>
 <?php 
 include "bootstrap/css/bootstrap.min.css";
-include 'EDT.css'; ?>
+include 'page0.css'; ?>
 </style>
   
 
@@ -13,11 +13,6 @@ include 'EDT.css'; ?>
 
 </div>
 
-<div id="menu">
-
-</div>
-
-<div id="contenu">
 <style type="text/css">
 caption /* Titre du tableau */
 {
@@ -51,42 +46,85 @@ td /* Les cellules normales */
    border: 1px solid black;
    /*font-family: "Comic Sans MS", "Trebuchet MS", Times, "Times New Roman", serif;*/
    text-align: center;
-   padding: 5px;
+   padding: 0px;
 }
 td.time
 {
     width:5%;
+    border:1px solid white;
+    text-align: right;
 }
+
+td.content{
+}
+
+.truc{
+	background-color: red;
+}
+
+div.jour{
+	padding-left: 0px;
+}
+
+table#heure td{
+	border : 1px solid white;
+	text-align: right; 
+}
+div.heure_content{
+	position:relative;
+	top:11px;
+}
+
+div.derniere-heure{
+	position:relative;
+	top:5px;
+}
+
+div.premiere-heure{
+	position:relaitve;
+	top:0px;
+}
+
 </style>
-<table>
-	<?php
-	    $jour = array(null, "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
-	    $rdv["Lundi"]["9:30"] = "Maths";
-	    echo "<tr><th>Heure</th>";
-	    for($x = 1; $x < 6; $x++)
-	        echo "<th>".$jour[$x]."</th>";
-	    echo "</tr>";
-	    for($j = 7; $j < 21; $j += 0.25) {
-	        echo "<tr>";
-	        for($i = 0; $i < 5; $i++) {
-	            if($i == 0) {
-	                $heure = str_replace(".25", ":15", $j);
-	                $heure = str_replace(".5", ":30", $j); /* Ne fonctionne pas */
-	                $heure = str_replace(".75", ":45", $j);
-	                echo "<td class=\"time\">".$heure."</td>";
-	            }
-	            echo "<td>";
-	            if(isset($rdv[$jour[$i+1]][$heure])) {
-	                echo $rdv[$jour[$i+1]][$heure];
-	            }
-	            echo "</td>";
-	        }
-	        echo "</tr>";
-	    }
-	?>
-</table>
 
-</div>
+<div class="row">
+	<table id="jour">
+		<?php
+		    $jour = array(null, "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
+		    $rdv["Lundi"]["9:30"] = "Maths";
+		    echo "<tr><th>Heure</th>";
+		    for($x = 1; $x < 6; $x++)
+		        echo "<th>".$jour[$x]."</th>";
+		    echo "</tr>";
 
+		    for($j = 7; $j < 20.75; $j += 0.25) {
+		        echo "<tr>";
+		        for($i = 0; $i < 5; $i++) {
+					if($i == 0) {
+						$heure=floor($j);
+						$decimal=$j-$heure;
+						$min=$decimal*60;
+						if ($min==0){
+							$min="00";
+						}
+		                echo "<td class=\"time\"><div class=\"heure_content\">".$heure.":".$min."-</div></td>";
+		            }
+
+		            /*if(isset($rdv[$jour[$i+1]][$heure])) {
+		                echo $rdv[$jour[$i+1]][$heure];
+		            }*/
+		            echo "<td><div class=\"truc\"> truc </div></td>";
+		        }
+		        echo "</tr>";
+		    }
+		    echo "<tr><td class=\"time\"><div class=\"heure_content derniere-heure\">20:45_</div></td>";
+		    echo "<td><div class=\"truc\"> truc </div></td>";
+		    echo "<td><div class=\"truc\"> truc </div></td>";
+		    echo "<td><div class=\"truc\"> truc </div></td>";
+		    echo "<td><div class=\"truc\"> truc </div></td>";
+		    echo "<td><div class=\"truc\"> truc </div></td>";
+		    echo "</tr>";
+		?>
+	</table>
 </div>
 		  
