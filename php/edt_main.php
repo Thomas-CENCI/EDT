@@ -6,6 +6,9 @@
       }else{
         $page=$_GET["page"];
       }
+
+       $active = array(" "," "," "," ");
+       $active[$page]= "active";
 ?>
 
 <!DOCTYPE html>
@@ -28,18 +31,18 @@
 
 	  		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		   		<ul class="navbar-nav mr-auto">
-		      		<li class="nav-item active">
+		      		<?php echo "<li class=\"nav-item $active[0]\">"; ?>
 		        		<a class="nav-link" href="?page=0">Emploi du temps <span class="sr-only">(current)</span></a>
 		     		</li>
 		     		<?php if($statut == "admin"): ?>
-			      		<li class="nav-item">
+		      			<?php echo "<li class=\"nav-item $active[1]\">"; ?>
 			        		<a class="nav-link" href="?page=1">Gestion cours</a> <!-- Permet à l'admin d'ajouter, de supprimer et de modifier des cours -->
 			      		</li>
-			      		<li class="nav-item">
+		      			<?php echo "<li class=\"nav-item $active[2]\">"; ?>
 			        		<a class="nav-link" href="?page=2">Demandes de cours</a> <!-- affiche toutes les demandes à traiter -->
 			      		</li>
 			      	<?php elseif($statut == "enseigant"): ?>
-			      		<li class="nav-item">
+		      			<?php echo "<li class=\"nav-item $active[3]\">"; ?>
 			        		<a class="nav-link" href="?page=3">Demander des cours</a> <!-- Demander à l'damin d'ajouter, de supprimer ou de modifier des cours  -->
 			      		</li>
 			      	<?php endif; ?>

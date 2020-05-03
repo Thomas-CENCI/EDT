@@ -22,7 +22,7 @@ include 'EDT.css'; ?>
 caption /* Titre du tableau */
 {
    margin: auto; /* Centre le titre du tableau */
-   font-family: Arial, Times, "Times New Roman", serif;
+   /*font-family: Arial, Times, "Times New Roman", serif;*/
    font-weight: bold;
    font-size: 1.2em;
    color: #009900;
@@ -41,14 +41,15 @@ th /* Les cellules d'en-tête */
    background-color: #006600;
    color: white;
    font-size: 1.1em;
-   font-family: Arial, "Arial Black", Times, "Times New Roman", serif;
+   /*font-family: Arial, "Arial Black", Times, "Times New Roman", serif;*/
    border:1px solid red;
+   text-align: center;
 }
 
 td /* Les cellules normales */
 {
    border: 1px solid black;
-   font-family: "Comic Sans MS", "Trebuchet MS", Times, "Times New Roman", serif;
+   /*font-family: "Comic Sans MS", "Trebuchet MS", Times, "Times New Roman", serif;*/
    text-align: center;
    padding: 5px;
 }

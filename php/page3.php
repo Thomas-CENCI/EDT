@@ -1,5 +1,5 @@
 <head>
-	<meta name=description content="Demdander d'un évennement - ENSEIGNANT">
+	<meta name=description content="Demande d'un évennement - ENSEIGNANT">
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
