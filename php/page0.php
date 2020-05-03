@@ -1,3 +1,31 @@
+<?php
+	$hostname ="sql7.freemysqlhosting.net:3306";
+	$username="sql7336475";
+	$password="ItBWtR3xM5";
+	$db="sql7336475";
+	$conn = new mysqli($hostname, $username, $password, $db) or die('Error connecting to database');
+
+	$requete_sql = "SELECT DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION FROM events WHERE DTSTART LIKE '%06-29%";
+
+	$result = mysqli_query($conn, $requete_sql);
+	$fetch_array = mysqli_fetch_row($result);
+	echo print_r($fetch_array);
+	$date_debut = $fetch_array[0];
+	$date_fin =$fetch_array[1];
+	$titre_activite =$fetch_array[2];
+	$location =$fetch_array[3];
+	$description =$fetch_array[4];
+
+	$intervalle = strtotime($date_fin)-strtotime($date_debut); /*strtotime converti une date anglaise qui est un string en timestamp ( le nombre de seconde entre la date et le 1er janvier 1970 00:00:00 GMT))*/
+	echo $description;
+	/*$intervalle est en seconde*/
+	$intervalle_min = $intervalle/60; /*convertit en minute*/
+	$intervalle_case = $intervalle_min/15; /*convertit en nombre de case, une case est égale à 15 min*/
+	echo $intervalle_case;
+
+	/*rowspan : https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_td_rowspan */
+?>
+
 <style>
 <?php 
 include "bootstrap/css/bootstrap.min.css";
