@@ -1,0 +1,73 @@
+<style type="text/css">
+caption /* Titre du tableau */
+{
+   margin: auto; /* Centre le titre du tableau */
+   /*font-family: Arial, Times, "Times New Roman", serif;*/
+   font-weight: bold;
+   font-size: 1.2em;
+   color: #009900;
+   margin-bottom: 20px;
+}
+
+table /* Le tableau en lui-même */
+{
+   margin: auto;
+   border: 4px outset green;
+   border-collapse: collapse;
+   width:100%;
+}
+th /* Les cellules d'en-tête */
+{
+   background-color: #006600;
+   color: white;
+   font-size: 1.1em;
+   /*font-family: Arial, "Arial Black", Times, "Times New Roman", serif;*/
+   border:1px solid red;
+   text-align: center;
+}
+
+td /* Les cellules normales */
+{
+   border: 1px solid black;
+   /*font-family: "Comic Sans MS", "Trebuchet MS", Times, "Times New Roman", serif;*/
+   text-align: center;
+   padding: 0px;
+}
+td.time
+{
+    width:5%;
+    border:1px solid white;
+    text-align: right;
+}
+
+td.content{
+}
+
+.truc{
+	background-color: red;
+}
+
+div.jour{
+	padding-left: 0px;
+}
+
+table#heure td{
+	border : 1px solid white;
+	text-align: right; 
+}
+div.heure_content{
+	position:relative;
+	top:11px;
+}
+
+div.derniere-heure{
+	position:relative;
+	top:5px;
+}
+
+div.premiere-heure{
+	position:relaitve;
+	top:0px;
+}
+
+</style>
