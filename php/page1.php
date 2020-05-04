@@ -11,7 +11,7 @@ $password="ItBWtR3xM5";
 $db="sql7336475";
 $conn = new mysqli($hostname, $username, $password, $db) or die('Error connecting to database');
 
-$SQL = ("UPDATE table SET colonne = '".$_GET['quelquechose']."', colonne = '".$_GET['quelquechose']."', colonne = '".$_GET['quelquechose']."', colonne = '".$_GET['quelquechose']."', colonne = '".$_GET['quelquechose']."' WHERE colonne = '".$_GET['quelquechose']."'");
+$SQL = ("INSERT INTO modification ('identifiantUtilisateur', 'nomEvent', 'dateEvent', 'enseignantEvent', 'salleEvent', 'heureDebut', 'heureFin', 'groupeEvent') VALUES ('".$_SESSION['login']."', nameEvent = '".$_GET['nom']."', dateEvent = '".$_GET['date']."', enseignantEvent = '".$_GET['enseignant']."', salleEvent = '".$_GET['salle']."', heureDebut = '".$_GET['heureDebut']."', heureFin = '".$_GET['heureFin']."', groupeEvent = '".$_GET['groupe']."')";
 $requete = mysql_query($SQL);
 
 	header('Location: edt_main.php?');
