@@ -122,6 +122,9 @@
 				var nb_rows = quarters_np(dtstart, dtend);
 				var week_date = ISO8601_week_no(new Date(dtstart));
 
+				if (nb_rows == 0){
+					nb_rows = 0.5//30min
+				}
 
 				if (week_date == current_week){
 					var id_nb = dict_days[String(new Date(dtstart)).split(" ")[0]];
