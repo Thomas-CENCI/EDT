@@ -25,6 +25,36 @@
 	//20200424T104128Z
 	//'2021-03-06 17:33:07'
 
+	function description($chaine){
+		$tableauDesc = explode("\\n", $chaine);
+		$tabFinal = [];
+		$i = 0; 
+		$j = 2;
+		while ( $i == 0) {
+			if($j >= count($tableauDesc)-1){$i = 1;}
+			else{
+					$ensemble = explode("-", $tableauDesc[$j]);
+					if($ensemble[0] == 'IDU' or $ensemble[0] == 'MM' or $ensemble[0] == 'IAI'){
+						$classe = $ensemble[0].'-'.$ensemble[1];
+						if(count($ensemble) == 2) {
+							$groupe = 'CM';
+						} else {
+							$groupe = $ensemble[3];
+						}
+						//echo "Le cours est pour la classe : ".$classe." le groupe est le suivant : ".$groupe."</br>";
+						$a = [$classe,$groupe];
+						array_push($tabFinal,$a);
+					}
+					else{
+						$i = 1;
+					}
+
+					$j = $j +1;
+			}
+		}
+	return $tabFinal;
+	}
+
 	function convert_to_datetime($datetime){
 		list($date, $time) = array_pad(explode("T", $datetime), 2, null);
 
@@ -56,6 +86,7 @@
 	}
 
 	function add_event($event){
+		$g = description($event['DESCRIPTION']);
 		$hostname = "sql7.freemysqlhosting.net:3306";
 		$username="sql7336475";
 		$password="ItBWtR3xM5";
@@ -70,15 +101,48 @@
 		$dtstart = convert_to_datetime($event['DTSTART']);
 		$dtend = convert_to_datetime($event['DTEND']);
 
+		// Importation dans la table event
 		$stmt = $conn->prepare("INSERT INTO sql7336475.events (DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION) VALUES (?, ?, ?, ?, ?)");
 		$stmt->bind_param('sssss', $dtstart, $dtend, $event['SUMMARY'], $event['LOCATION'], $event['DESCRIPTION']);
-
 		if ($stmt->execute()){
 			echo 'Event added !'.'<br>';
 		}
 		else{
 			echo "Error: ". $conn->error;
 		}
+
+		// Importation dans la table inscritCours
+		foreach ($g as $dat) {
+			// Récupération de l'identifiant du groupe
+			$reqP = $conn->prepare("SELECT identifiant From sql7336475.groupe WHERE groupe.nom like ? and groupe.classe like ?");
+			$reqP->bind_param('ss',$dat[1], $dat[0]);			
+			$reqP->execute();
+			$reqP->bind_result($identifiant);
+			$reqP->fetch();
+			$reqP->close();
+			// Récupération de l'identifiant de l'event
+			$reqP2 = $conn->prepare("SELECT id From sql7336475.events WHERE events.`DTSTART` like ? and events.`DTEND` like ? 
+									 and events.`LOCATION` like  ? 
+						
+									 ");
+
+			$ev = '%'.$event['LOCATION'].'%';
+			$reqP2->bind_param('sss', $dtstart, $dtend, $ev);
+			$reqP2->execute();
+			$reqP2->bind_result($id1);
+			$reqP2->fetch();
+			$reqP2->close();
+
+			$reqP3 = $conn->prepare("INSERT INTO sql7336475.inscitCours (identifiantevents, identifiantGroupe) VALUES (?, ?)");
+			$reqP3->bind_param('ss', $id1, $identifiant);
+			$reqP3->execute();
+			$reqP3->close();
+			
+		}
+
+
+
+
 	}
 
 	function update_bd($events){
@@ -128,4 +192,8 @@
 
 		echo 'Done !';
 	}
+
+
+
+
 ?>
