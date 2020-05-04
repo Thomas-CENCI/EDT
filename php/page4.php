@@ -122,7 +122,6 @@
 				var nb_rows = quarters_np(dtstart, dtend);
 				var week_date = ISO8601_week_no(new Date(dtstart));
 
-				console.log(nb_rows);
 
 				if (week_date == current_week){
 					var id_nb = dict_days[String(new Date(dtstart)).split(" ")[0]];
@@ -131,9 +130,9 @@
 
 					id_displayed[id] = $("#"+id).clone();
 
-					document.getElementById(id).innerHTML = summary;
+					document.getElementById(id).innerHTML = summary+'<br>'+dtstart+'<br>'+dtend;
   				var parent = $('#'+id).parent();
-  				parent.attr('rowspan', 4);
+  				parent.attr('rowspan', nb_rows*4);
    				$('#'+id).css('height', parent.height());
 				}
 			}
