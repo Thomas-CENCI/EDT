@@ -1,0 +1,31 @@
+.table {
+  font-size: 11px;
+}
+
+.table tr {
+	height: 10px;
+}
+
+.full-hour {
+	border-top: 1px solid lightgrey;
+}
+
+.table td {
+	border: none;
+	text-align: center;
+	vertical-align: top;
+	color: grey;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.table td div {
+    background-color: lightblue;
+    height: 100%;
+    overflow: auto;
+	border-radius: 0.5em;
+	vertical-align: middle;
+}
+
