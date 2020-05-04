@@ -28,8 +28,8 @@
 
 <style>
 <?php 
-include "bootstrap/css/bootstrap.min.css";
-include 'page0.css'; 
+include "../css/bootstrap/css/bootstrap.min.css";
+include '../css/page0.css'; 
 ?>
 </style>
   

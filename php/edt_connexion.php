@@ -49,8 +49,8 @@
 		<title>EDT - connexion </title>
 		<meta content="info">
     	<meta charset="UTF-8">
-    	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    	<link href="edt_connexion.css" rel="stylesheet">
+    	<link href="../css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    	<link href="../css/edt_connexion.css" rel="stylesheet">
 	</head>
 
 	<body>

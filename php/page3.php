@@ -1,6 +1,6 @@
 <head>
 	<meta name=description content="Demande d'un évennement - ENSEIGNANT">
-	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <?php
