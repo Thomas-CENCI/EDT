@@ -100,13 +100,15 @@
 	<script>
 		var numWeeks = 0;
 		var current_week = ISO8601_week_no(addDays(0, numWeeks));
+		var php_array = <?php echo json_encode($res); ?>;
 		var id_displayed = {};
 
 		function php_event(){
 			var dict_days = {'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6, 'Sun': 7};
-			var php_array = <?php echo json_encode($res); ?>;
 
 			for (key in id_displayed) {
+  			var parent = $('#'+key).parent();
+  			parent.attr('rowspan', 1);
 				$('#'+key).replaceWith(id_displayed[key]);
 			}
 
@@ -119,6 +121,8 @@
 
 				var nb_rows = quarters_np(dtstart, dtend);
 				var week_date = ISO8601_week_no(new Date(dtstart));
+
+				console.log(nb_rows);
 
 				if (week_date == current_week){
 					var id_nb = dict_days[String(new Date(dtstart)).split(" ")[0]];
@@ -182,9 +186,6 @@
 
   			$("div[id^='day-']").click(function(){
   				var data = $(this).text();
-  				var parent = $(this).parent();
-  				parent.attr('rowspan', 4);
-   				$(this).css('height', parent.height());
 
     			$("#myModal").modal('show');
      			$('input[id=event_data]').val( data );
