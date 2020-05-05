@@ -2,17 +2,13 @@
   font-size: 11px;
 }
 
-.table tr {
-	height: 10px;
-}
-
 .full-hour {
 	border-top: 1px solid lightgrey;
 }
 
-.table td {
+.table tr td {
+	height: 15px;
 	width: 150px;
-	height: 10px;
 	border: none;
 	text-align: center;
 	vertical-align: top;
@@ -23,8 +19,7 @@
 	padding-bottom: 0px;
 }
 
-.table td div {
-	width: 150px;
+.table tr td div {
     background-color: lightblue;
     overflow-y: auto;
    	border-radius: 0.5em;
@@ -33,10 +28,14 @@
 
 .table-div {
   overflow-y: auto;
-  height: 600px;
 }
 
 .table-div th {
   position: sticky;
   top: 0;
+}
+
+.table thead, .table tbody, .table tbody tr {
+    width: 100%;
+    table-layout: auto;
 }

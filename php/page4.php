@@ -14,9 +14,8 @@
 			<button type="button" class="btn btn-dark" id='btn+'>></button>
 		</div>
 
-
-		<div class="table-div table-responsive">	
-			<table class="table">
+		<div class="table-div table-responsive" style="height: 675px">	
+			<table class="table" cellpadding="24px">
 				<thead class="thead-dark">
 					<tr>
 						<th scope="col" style="text-align: center;">Heure</th>
@@ -106,8 +105,7 @@
 				else{
 					//Row label
 					$html = $html." "."<tr>
-									<td></td>
-								";
+									<td></td>";
 				}
 
 				foreach ($array_day as $day) {
@@ -149,12 +147,11 @@
 					var html = "<p style='font-weight: bold'>"+summary+"</p><p>Début : "+dtstart+"</p><p>Fin : "+dtend+"</p><p>Localisation : "+location+"</p><p> Description : "+description+"</p>";
 					$('#'+id).append(html);
 
-  				var parent = $('#'+id).parent();
-  				parent.attr('rowspan', nb_rows);
-   				$('#'+id).css('height', parent.height());
-   				$('#'+id).attr('data-rowspan', nb_rows);
-
    				delete_td(id, id_day, nb_rows);
+
+   				var parent = $('#'+id).parent();
+  				parent.attr('rowspan', nb_rows);
+   				$('#'+id).css('height', 17*nb_rows);
 				}
 			}
 			$('.table-div').animate({scrollTop:$('#'+first_event()).offset().top}, 'slow')
@@ -229,7 +226,7 @@
 
 			document.getElementById("btn_week").innerHTML = "Semaine "+current_week;
 
-			$("div[id^='div-']").click(function(){
+			$("div[id*='div-']").click(function(){
 				var children = $(this).children();
 
   			$("#EventModal").modal('show');
