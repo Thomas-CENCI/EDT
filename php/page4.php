@@ -144,13 +144,12 @@
 					var date_hour = dtstart.split(" ")[1].split(":");
 					var id = String("div-"+id_day+"-"+date_hour[0]+date_hour[1]);
 
-					var html = "<p style='font-weight: bold'>"+summary+"</p><p>Début : "+dtstart+"</p><p>Fin : "+dtend+"</p><p>Localisation : "+location+"</p><p> Description : "+description+"</p>";
+					var html = "<div style='font-weight: bold'>"+summary+"</div><br>Début : <div>"+dtstart+"</div>Fin : <div>"+dtend+"</div><br>Localisation : <div>"+location+"</div><br>Description : <div>"+description+"</div>";
 					$('#'+id).append(html);
 
    				delete_td(id, id_day, nb_rows);
 
-   				var parent = $('#'+id).parent();
-  				parent.attr('rowspan', nb_rows);
+  				$('#'+id).parent().attr('rowspan', nb_rows);
    				$('#'+id).css('height', 17*nb_rows);
 				}
 			}
@@ -210,40 +209,36 @@
 		document.getElementById('btn+').onclick = function() {
 			numWeeks += 1;
 			current_week = ISO8601_week_no(addDays(0, numWeeks));
-			document.getElementById("btn_week").innerHTML = "Semaine "+current_week;
-			display_events();
+			update_table();
 		}
 
 		document.getElementById('btn-').onclick = function() {
 			numWeeks += -1;
 			current_week = ISO8601_week_no(addDays(0, numWeeks));
-			document.getElementById("btn_week").innerHTML = "Semaine "+current_week;
-			display_events();
+			update_table();
 		}
 
-		$(document).ready(function(){
-			display_events();
+	function update_table(){
+		document.getElementById("btn_week").innerHTML = "Semaine "+current_week;
+		display_events();
+	};
 
-			document.getElementById("btn_week").innerHTML = "Semaine "+current_week;
-
-			$("div[id*='div-']").click(function(){
-				var children = $(this).children();
-
-  			$("#EventModal").modal('show');
-   			$('input[id=event_summary]').val( $(children[0]).text() );
-   			$('input[id=event_dtstart]').val( $(children[1]).text().split(': ')[1] );
-   			$('input[id=event_dtend]').val( $(children[2]).text().split(': ')[1] );
-   			$('input[id=event_location]').val( $(children[3]).text().split(': ')[1] );
-   			$('input[id=event_description]').val( $(children[4]).text().split(': ')[1] );
-			});
-
-			$("#edit_event_submit").click(function() {
-				$("#edit_event_form").submit();
-			});
-
-			$('.table tr').css('height', '5px');
-
+	$('.table').click(function(){
+		$('div[id^=div-]').click(function(){
+			var children = $(this).children('div');
+			$("#EventModal").modal('show');
+			$('input[id=event_summary]').val( $(children[0]).text() );
+			$('input[id=event_dtstart]').val( $(children[1]).text() );
+			$('input[id=event_dtend]').val( $(children[2]).text() );
+			$('input[id=event_location]').val( $(children[3]).text() );
+			$('input[id=event_description]').val( $(children[4]).text() );
+		})
 	});
 
+	$("#edit_event_submit").click(function() {
+		$("#edit_event_form").submit();
+	});
+
+	$(document).ready(update_table());
 	</script>
 </html>
