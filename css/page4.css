@@ -3,6 +3,8 @@
 }
 
 .table tr {
+    overflow-x: auto;
+    overflow-y: auto;
 	height: 10px;
 }
 
@@ -11,6 +13,9 @@
 }
 
 .table td {
+    overflow-x: auto;
+    overflow-y: auto;
+	width: 150px;
 	border: none;
 	text-align: center;
 	vertical-align: top;
@@ -22,10 +27,12 @@
 }
 
 .table td div {
+	width: 150px;
     background-color: lightblue;
-    height: 100%;
-    overflow: auto;
-	border-radius: 0.5em;
+    overflow-x: auto;
+    overflow-y: auto;
+   	border-radius: 0.5em;
 	vertical-align: middle;
+	display: inline-block;
 }
 
