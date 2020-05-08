@@ -1,5 +1,6 @@
 <?php
-	$statut = "admin"; # $_SESSION['statut']
+	session_start();
+	$status = $_SESSION['status']; # $_SESSION['statut']
 
 	if( !isset($_GET["page"]) ) { 
         $page=0;
@@ -41,7 +42,7 @@
 		      			<?php echo "<li class=\"nav-item $active[2]\">"; ?>
 			        		<a class="nav-link" href="?page=2">Demandes de cours</a> <!-- affiche toutes les demandes à traiter -->
 			      		</li>
-			      	<?php elseif($statut == "enseigant"): ?>
+			      	<?php elseif($statut == "enseignant"): ?>
 		      			<?php echo "<li class=\"nav-item $active[3]\">"; ?>
 			        		<a class="nav-link" href="?page=3">Demander des cours</a> <!-- Demander à l'damin d'ajouter, de supprimer ou de modifier des cours  -->
 			      		</li>

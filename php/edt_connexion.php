@@ -1,6 +1,4 @@
 <?php
-	session_start();
-
     $hostname ="sql7.freemysqlhosting.net:3306";
 	$username="sql7336475";
 	$password="ItBWtR3xM5";
@@ -42,6 +40,7 @@
 	    	if($row[1]==$_POST['password']){
 	    		$_SESSION['login']=$_POST['login'];
 	    		$_SESSION['password']=$_POST['password'];
+	    		session_start();
 	    		setStatus($row[2]);
 	    		header ('Location: edt_main.php');
 	    	}
