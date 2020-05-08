@@ -1,44 +1,68 @@
 <?php
 	session_start();
 
-    $user = 'root';
-	$password = 'root';
-	$db = 'inventory';
-	$host = 'localhost';
-	$port = 8889;
+    $hostname ="sql7.freemysqlhosting.net:3306";
+	$username="sql7336475";
+	$password="ItBWtR3xM5";
+	$db="sql7336475";
 
-	/*$link = mysqli_init();*/
-	/*$success = mysqli_real_connect($link, $host, $user, $password, $db, $port);*/
+	$link = mysqli_connect($hostname, $username, $password, $db);
 
-	/*if (mysqli_connect_error()) {
-    	die('Connect Error ('.mysqli_connect_errno().') '.mysqli_connect_error());
-  	}
+	/* check connection */
+	if (mysqli_connect_errno()) {
+	printf("Connect failed: %s\n", mysqli_connect_error());
+	exit();
+	}
 
-  	echo 'Connected successfully.';
-
-    mysql_query("SET NAMES UTF8");*/
+	function setStatus($nb_status) {
+		/*set la  variable global $_SESSION['status'] en fonction de l'utilisateur connecté*/
+		if ($nb_status==1){ /*c'est l'admin*/
+			$_SESSION['status']="admin";
+		}
+		else if ($nb_status==2){ /*c'est un enseignant */
+			$_SESSION['status']="enseignant";
+		}
+		else{ /*c'est un étudiant*/
+			$_SESSION['status']="etudiant";
+		}
+	}
 
     
     if(isset($_POST["connexion_bouton"])){
     	if($_POST['login']!="" && $_POST['password']!=""){
+    		$requete_sql = "SELECT identifiant, motsDePasse, type FROM utilisateur WHERE identifiant LIKE '" . $_POST['login'] . "'";
+    		$result = mysqli_query($link, $requete_sql);
+    		$row = mysqli_fetch_array($result, MYSQLI_NUM);
+    		/*
 	    	$requete_sql="SELECT motsDePasse FROM utilisateur WHERE  	identifiant LIKE '" . $_POST['login'] . "'";
 	    	$result = mysql_query($requete_sql) or die("Requête invalide: ". mysql_error()."\n".$requete_sql);
-	    	$data = mysql_fetch_row($result);
-	    	
-	    	if($data[0]==$_POST['password']){
+	    	$data = mysql_fetch_row($result);*/
+	    	echo $row[0] . " ". $row[1]. " ".$row[2];
+	    	echo "password : " . $_POST['password'];
+	    	if($row[1]==$_POST['password']){
 	    		$_SESSION['login']=$_POST['login'];
 	    		$_SESSION['password']=$_POST['password'];
-	    		$access_granted = True;
-	    		header ('Location: EDT.php');
+	    		setStatus($row[2]);
+	    		header ('Location: edt_main.php');
 	    	}
 	    	else{
 	    		$acces_denied = True;
+	    		echo "1";
 	    	}
     	}
 	    else{
 	    	$acces_denied = True;
+	    	echo "2";
     	}
+	    /* free result set */
+		mysqli_free_result($result);
+
+		/* close connection */
+		mysqli_close($link);
+
     }
+
+
     
    	/*$mysqli->close();*/
 ?>
