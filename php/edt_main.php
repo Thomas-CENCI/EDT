@@ -7,7 +7,7 @@
         $page=$_GET["page"];
       }
 
-       $active = array(" "," "," "," ");
+       $active = array(" "," "," "," "," ");
        $active[$page]= "active";
 ?>
 
@@ -22,11 +22,10 @@
 	</head>
 
 	<body>
-
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  		<a class="navbar-brand" href="?page=0">EDT</a>
 	  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	    		<span class="navbar-toggler-icon"></span>
+	    		<span class="navbar-toggler-icon"></span> 
 	  		</button>
 
 	  		<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -46,6 +45,13 @@
 			        		<a class="nav-link" href="?page=3">Demander des cours</a> <!-- Demander à l'damin d'ajouter, de supprimer ou de modifier des cours  -->
 			      		</li>
 			      	<?php endif; ?>
+			      	<?php echo "<li class=\"nav-item dropdown $active[4]\">"; ?>
+			        		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">truc</a>
+			      			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          						<a class="dropdown-item" href="#">aide</a>
+          						<a class="dropdown-item" href="#">Déconnexion</a>
+        					</div>
+			      		</li>
 		    	</ul>
 		    	<form class="form-inline my-2 my-lg-0">
 		    		<div class="form-group">
@@ -58,7 +64,6 @@
 		</nav>
 		
 		<div class="container content">
-
 			<?php
         		if(file_exists("page".$page.".php") ){ 
          		 include("page".$page.".php");
