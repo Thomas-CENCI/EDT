@@ -1,7 +1,6 @@
 <?php
 	session_start();
-	$status = $_SESSION['status']; # $_SESSION['statut']
-
+	$status = $_SESSION['status'];
 	if( !isset($_GET["page"]) ) { 
         $page=0;
       }else{
@@ -35,14 +34,14 @@
 		      		<?php echo "<li class=\"nav-item $active[0]\">"; ?>
 		        		<a class="nav-link" href="?page=0">Emploi du temps <span class="sr-only">(current)</span></a>
 		     		</li>
-		     		<?php if($statut == "admin"): ?>
+		     		<?php if($status == "admin"): ?>
 		      			<?php echo "<li class=\"nav-item $active[1]\">"; ?>
 			        		<a class="nav-link" href="?page=1">Gestion cours</a> <!-- Permet à l'admin d'ajouter, de supprimer et de modifier des cours -->
 			      		</li>
 		      			<?php echo "<li class=\"nav-item $active[2]\">"; ?>
 			        		<a class="nav-link" href="?page=2">Demandes de cours</a> <!-- affiche toutes les demandes à traiter -->
 			      		</li>
-			      	<?php elseif($statut == "enseignant"): ?>
+			      	<?php elseif($status == "enseignant"): ?>
 		      			<?php echo "<li class=\"nav-item $active[3]\">"; ?>
 			        		<a class="nav-link" href="?page=3">Demander des cours</a> <!-- Demander à l'damin d'ajouter, de supprimer ou de modifier des cours  -->
 			      		</li>
