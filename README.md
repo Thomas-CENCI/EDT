@@ -14,8 +14,6 @@ Le logiciel d'emploi du temps que vous connaissez permet de faire remonter des q
 - Thomas: Bootstrap / git
 - Loïc: Modèle relationelle
 
-- //vieul
-- //iymhnc8d
 
 
  L'application devrait permettre : 
