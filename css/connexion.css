@@ -12,21 +12,26 @@ div#connexion_block{
 }
 
 .vertical-center {
-  min-height: 90%; /*some browser does not support vh*/
-  min-height: 90vh;
+  min-height: 80%; /*some browser does not support vh*/
+  min-height: 80vh;
 
   display: flex;
   align-items: center;
 }
 
+
 div.form-group {
-	margin: 15px;
+  margin: 15px;
 }
 
 div.form-bottom{
-	margin-bottom:20px;
+  margin-bottom:20px;
 }
 
 div.form-top{
-	margin-top:20px;
+  margin-top:20px;
+}
+
+div.semi_footer{
+  margin: 15px;
 }
