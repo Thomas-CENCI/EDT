@@ -1,45 +1,45 @@
 <?php
-	$hostname ="sql7.freemysqlhosting.net:3306";
-	$username="sql7336475";
-	$password="ItBWtR3xM5";
-	$db="sql7336475";
+	// $hostname ="sql7.freemysqlhosting.net:3306";
+	// $username="sql7336475";
+	// $password="ItBWtR3xM5";
+	// $db="sql7336475";
 
-	$link = mysqli_connect($hostname, $username, $password, $db);
+	// $link = mysqli_connect($hostname, $username, $password, $db);
 
-	/* check connection */
-	if (mysqli_connect_errno()) {
-	printf("Connect failed: %s\n", mysqli_connect_error());
-	exit();
-	}
+	// /* check connection */
+	// if (mysqli_connect_errno()) {
+	// printf("Connect failed: %s\n", mysqli_connect_error());
+	// exit();
+	// }
 
-	$requete_sql = "SELECT DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION FROM events WHERE DTSTART = \"2020-06-29 14:30:00\"";
-	$result = mysqli_query($link, $requete_sql);
+	// $requete_sql = "SELECT DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION FROM events WHERE DTSTART = \"2020-06-29 14:30:00\"";
+	// $result = mysqli_query($link, $requete_sql);
 
-	/* numeric array */
-	$row = mysqli_fetch_array($result, MYSQLI_NUM);
-	/*printf ("%s %s %s %s\n", $row[0], $row[1]);*/
+	// /* numeric array */
+	// $row = mysqli_fetch_array($result, MYSQLI_NUM);
+	// /*printf ("%s %s %s %s\n", $row[0], $row[1]);*/
 
-	$date_debut = $row[0];
-	$date_fin =$row[1];
-	$titre_activite =$row[2];
-	$location =$row[3];
-	$description =$row[4];
-	printf ("%s %s %s %s %s\n", $date_debut, $date_fin, $titre_activite, $location, $description);
+	// $date_debut = $row[0];
+	// $date_fin =$row[1];
+	// $titre_activite =$row[2];
+	// $location =$row[3];
+	// $description =$row[4];
+	// printf ("%s %s %s %s %s\n", $date_debut, $date_fin, $titre_activite, $location, $description);
 
-	$intervalle = strtotime($date_fin)-strtotime($date_debut); /*strtotime converti une date anglaise qui est un string en timestamp ( le nombre de seconde entre la date et le 1er janvier 1970 00:00:00 GMT))*/
-	/*$intervalle est en seconde*/
-	$intervalle_min = $intervalle/60; /*convertit en minute*/
-	$intervalle_case = $intervalle_min/15; /*convertit en nombre de case, une case est égale à 15 min*/
-	echo "intervalle case : $intervalle_case";
+	// $intervalle = strtotime($date_fin)-strtotime($date_debut); /*strtotime converti une date anglaise qui est un string en timestamp ( le nombre de seconde entre la date et le 1er janvier 1970 00:00:00 GMT))*/
+	// /*$intervalle est en seconde*/
+	// $intervalle_min = $intervalle/60; /*convertit en minute*/
+	// $intervalle_case = $intervalle_min/15; /*convertit en nombre de case, une case est égale à 15 min*/
+	// echo "intervalle case : $intervalle_case";
 
 
-	/* free result set */
-	mysqli_free_result($result);
+	// /* free result set */
+	// mysqli_free_result($result);
 
-	/* close connection */
-	mysqli_close($link);
+	// /* close connection */
+	// mysqli_close($link);
 
-	/*rowspan : https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_td_rowspan */
+	// /*rowspan : https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_td_rowspan */
 
 ?>
 

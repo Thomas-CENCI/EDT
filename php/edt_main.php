@@ -16,6 +16,10 @@
 		header ('Location: edt_connexion.php');
 
     }
+
+    if(isset($_GET["recherche"])){
+    	$page=5; // on va à la page 5
+    }
 ?>
 
 <!DOCTYPE html>
@@ -64,12 +68,12 @@
 			      		</li>
 
 		    	</ul>
-		    	<form class="form-inline my-2 my-lg-0">
+		    	<form class="form-inline my-2 my-lg-0" method="GET">
 		    		<div class="form-group">
 						<label>Rechercher des cours </label>
 					</div>
-		      		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-		      		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+		      		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="barre_de_recherche" value="">
+		      		<button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="recherche" value="search">Search</button>
 		    	</form>
 	  		</div>
 		</nav>
