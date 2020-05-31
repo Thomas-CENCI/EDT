@@ -131,30 +131,12 @@
 		$month = substr($date, -4, -2);
 		$day = substr($date, -2);
 
-		$hour = substr($time, 0, -6);
+		$hour = (int)substr($time, 0, -6)+2;
 		$min = substr($time, -6, -4);
 
 		return $year.'-'.$month.'-'.$day.' '.$hour.':'.$min.':00';
 	}
 
-
-//--------------------------------------------------------------------------------------------
-	function drop_event($id){
-		echo $id;
-		$hostname = "sql7.freemysqlhosting.net:3306";
-		$username="sql7336475";
-		$password="ItBWtR3xM5";
-		$db="sql7336475";
-
-		// $hostname = "localhost:8889";
-		// $username="root";
-		// $password="root";
-		// $db="sql7336475";
-		$conn = new mysqli($hostname, $username, $password, $db) or die('Error connecting to database');
-
-		$sql = "DELETE FROM events WHERE id=".$id;
-		mysqli_query($conn, $sql);
-	}
 
 //--------------------------------------------------------------------------------------------
 	function add_event($event){
@@ -212,8 +194,7 @@
 			$reqP->bind_result($identifiant);
 			$reqP->fetch();
 			$reqP->close();
-			
-			echo "L id de l evenement est : ".$id1." l identifiant du groupe est : ".$identifiantGroupe." et l identifiant du prof est : ".$identifiantP;
+
 			// ----- Ajout des données dans la table inscitCours -----
 			$reqP3 = $conn->prepare("INSERT INTO sql7336475.inscitCours (identifiantevents, identifiantGroupe, idProf) VALUES (?, ?, ?)");
 			$reqP3->bind_param('sss', $id1, $identifiant,$identifiantP);
@@ -245,26 +226,20 @@
 		$result = mysqli_fetch_all($response, MYSQLI_ASSOC);
 
 		date_default_timezone_set('Europe/Paris');
-		$current_datetime = date('Y-m-d H:i:s');
+		$current_datetime = date("Y-m-d H:i:s", strtotime('+2 hours'));
 
 		$all_dtstrat = array();
 
 		foreach ($result as $bd_event) {
 			$all_dtstrat[] = $bd_event['DTSTART'];
-
-			if (strtotime($current_datetime) > strtotime($bd_event['DTEND'])){
-				drop_event($bd_event['id']);
-			}
 		}
 
 		foreach ($events as $event) {
 			if(in_array(convert_to_datetime($event['DTSTART']), $all_dtstrat)){//Two different events but with same DTSTART
 				foreach ($result as $bd_event){
-					if ($bd_event['DTSTART'] == convert_to_datetime($event['DTSTART'])){
-						if (!($bd_event['SUMMARY'] == $event['SUMMARY'] && $bd_event['DESCRIPTION'] == $event['DESCRIPTION']) && strtotime($current_datetime) < strtotime(convert_to_datetime($event['DTEND']) ) ){
-							//Not the same event
-							add_event($event);
-						}
+					if ($bd_event['DTSTART'] == convert_to_datetime($event['DTSTART']) && !($bd_event['SUMMARY'] == $event['SUMMARY'] && $bd_event['DESCRIPTION'] == $event['DESCRIPTION']) && strtotime($current_datetime) < strtotime(convert_to_datetime($event['DTEND']) ) ){
+						//Not the same event
+						add_event($event);
 					}
 				}
 			}
