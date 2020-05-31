@@ -1,5 +1,4 @@
 <?php
-	$requete = $_SESSION['barre_de_recherche'];
 	$hostname ="sql7.freemysqlhosting.net:3306";
 	$username="sql7336475";
 	$password="ItBWtR3xM5";
@@ -36,6 +35,7 @@
 		  <?php echo "<img src=\"../image/$module.jpg\" class=\"card-img-top\" alt=\"$module\">"; ?> <!-- on modifie l'image selon le module-->
 		  <div class="card-body">
 		    <h5 class="card-title"> <?=$row[2]?> </h5>
+		    <?php $row[4] = str_replace('\\n', ' ', $row[4]); ?>
 		    <p class="card-text"><?=$row[4]?></p>
 		    <a href="#" class="btn btn-primary">Plus d'info</a>
 		  </div>
