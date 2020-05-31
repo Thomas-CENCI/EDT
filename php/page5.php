@@ -13,24 +13,26 @@
 	}
 	$requete = $_GET["barre_de_recherche"];
 
-	$requete_sql = "SELECT DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION, id FROM events WHERE (DTSTART LIKE '%$requete%') OR (DTEND LIKE '%$requete%') OR (SUMMARY LIKE '%$requete%') OR (LOCATION LIKE '%$requete %') OR (DESCRIPTION LIKE '%$requete%')";
-	$result = mysqli_query($link, $requete_sql);
+	$requete_event_sql = "SELECT DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION, id FROM events WHERE (DTSTART LIKE '%$requete%') OR (DTEND LIKE '%$requete%') OR (SUMMARY LIKE '%$requete%') OR (LOCATION LIKE '%$requete %') OR (DESCRIPTION LIKE '%$requete%')";
+	$result_event = mysqli_query($link, $requete_event_sql);
+
+	// est ce qu'il faut aussi faire les recherches sur les salles, groupres et utilisateur ??
+
+
 ?>
 
 <div class="row">
-  <div class="col-lg-8">
-    <h1>Résultat de la recherche : <?=$requete;?></span></h1>
+  <div class="col-lg-12">
+    <h1>Résultat de la recherche pour les évènements : <?=$requete;?></span></h1>
   </div>
 </div>
 
 <div class="container">
 <?php $i=0; ?>
-<?php while($row = mysqli_fetch_array($result, MYSQLI_NUM)): ?> <!-- afficher message quand il n'y pas de résultat-->
+<div class="row">
+<?php while($row = mysqli_fetch_array($result_event, MYSQLI_NUM)): ?> <!-- afficher message quand il n'y pas de résultat-->
 	<?php $id_event = $row[5];?>
-	<?php if($i==0): ?>
-		<div class="row">
-	<?php endif; ?>
-	<div class="col-lg-4">
+	<div class="col-lg-4 col-md-6">
 		<div class="card" style="width: 18rem; margin: 10px;">
 			<?php $module = substr($row[2],0, 7); ?>
 		  <?php echo "<img src=\"../image/$module.jpg\" class=\"card-img-top\" alt=\"$module\">"; ?> <!-- on modifie l'image selon le module-->
@@ -53,7 +55,10 @@
 		        </button>
 		      </div>
 		      <div class="modal-body">
-		        <?=$row[4];?>
+		      	<?="Début: $row[0]</br>";?>
+		      	<?="Fin: $row[1]</br>";?>
+		      	<?="Localisation: $row[3]</br>";?>
+		        <?="Description: $row[4]";?>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -62,21 +67,15 @@
 		    </div>
 		  </div>
 		</div> 
-
 	</div>
-	<?php $i=$i+1; ?>
-	<?php if($i==3):
-		$i=0;
-		echo "</div>";
- 	endif; ?>
-
 <?php endwhile; ?>
+</div>
 
 </div>
 
 <?php
 		/* free result set */
-		mysqli_free_result($result);
+		mysqli_free_result($result_event);
 
 		/* close connection */
 		mysqli_close($link);
