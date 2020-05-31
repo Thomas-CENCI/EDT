@@ -26,6 +26,7 @@
 <div class="container">
 <?php $i=0; ?>
 <?php while($row = mysqli_fetch_array($result, MYSQLI_NUM)): ?> <!-- afficher message quand il n'y pas de résultat-->
+	<?php $id_event = $row[5];?>
 	<?php if($i==0): ?>
 		<div class="row">
 	<?php endif; ?>
@@ -34,12 +35,34 @@
 			<?php $module = substr($row[2],0, 7); ?>
 		  <?php echo "<img src=\"../image/$module.jpg\" class=\"card-img-top\" alt=\"$module\">"; ?> <!-- on modifie l'image selon le module-->
 		  <div class="card-body">
-		    <h5 class="card-title"> <?=$row[2]?> </h5>
+		    <h5 class="card-title"> <?=$row[2];?> </h5>
 		    <?php $row[4] = str_replace('\\n', ' ', $row[4]); ?>
-		    <p class="card-text"><?=$row[4]?></p>
-		    <a href="#" class="btn btn-primary">Plus d'info</a>
+		    <p class="card-text"><?=$row[4];?></p>
+		    <?php echo "<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#modal_de_$id_event\"> Plus d'info </button>"; ?> <!-- bouton qui ouvre le modal NB : on prend $id event car unique-->
 		  </div>
 		</div>
+
+ 		<!-- Modal qui s'affiche uniquement si on appui sur le bouton "Plus d'info"-->
+		<?php echo "<div class=\"modal fade\" id=\"modal_de_$id_event\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">"; ?>
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <?php echo "<h5 class=\"modal-title\" id=\"exampleModalLabel\">$row[2]</h5>"; ?>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <?=$row[4];?>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div> 
+
 	</div>
 	<?php $i=$i+1; ?>
 	<?php if($i==3):

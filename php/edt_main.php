@@ -2,12 +2,12 @@
 	session_start();
 	$status = $_SESSION['status'];
 	if( !isset($_GET["page"]) ) { 
-        $page=4;
+        $page=0;
       }else{
         $page=$_GET["page"];
       }
 
-       $active = array(" "," "," "," "," ");
+       $active = array(" "," "," "," ");
        $active[$page]= "active";
 
     if(isset($_GET["deconnexion"])){
@@ -33,19 +33,19 @@
     	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-	</head>
+		</head>
 
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	  		<a class="navbar-brand" href="?page=4">EDT</a>
+	  		<a class="navbar-brand" href="?page=0">EDT</a>
 	  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    		<span class="navbar-toggler-icon"></span> 
 	  		</button>
 
 	  		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		   		<ul class="navbar-nav mr-auto">
-		      		<?php echo "<li class=\"nav-item $active[0]\">"; ?>
-		        		<a class="nav-link" href="?page=4">Emploi du temps</a>
+		      		<?php echo "<li class=\"nav-item $active[0]\">"; ?> <!-- peut être à changer le 0 en 4 -->
+		        		<a class="nav-link" href="?page=0">Emploi du temps</a>
 		     		</li>
 		     		<?php if($status == "admin"): ?>
 		      			<?php echo "<li class=\"nav-item $active[1]\">"; ?>
@@ -59,7 +59,7 @@
 			        		<a class="nav-link" href="?page=3">Demander des cours</a> <!-- Demander à l'damin d'ajouter, de supprimer ou de modifier des cours  -->
 			      		</li>
 			      	<?php endif; ?>
-			      	<?php echo "<li class=\"nav-item dropdown $active[4]\">"; ?>
+			      	<li class="nav-item dropdown">
 			        		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">⚙️</a>
 			      			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
           						<a class="dropdown-item" href="#">aide</a>

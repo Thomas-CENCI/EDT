@@ -1,111 +1,247 @@
-<?php
-	// $hostname ="sql7.freemysqlhosting.net:3306";
-	// $username="sql7336475";
-	// $password="ItBWtR3xM5";
-	// $db="sql7336475";
+<html>
+	<head>
+		<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>--> <!-- il faut enlever car déjà importer dans main -->
+		<link rel="stylesheet" href="../css/page4.css"> <!-- il faudra changer avec la page0.css je pense -->
+	</head>
 
-	// $link = mysqli_connect($hostname, $username, $password, $db);
+	<body>
+		<div class="mb-2" style="text-align: center;">
+			<button type="button" class="btn btn-dark" id='btn-'><</button>
+			<button type="button" class="btn btn-dark" id='btn_week' disabled></button>
+			<button type="button" class="btn btn-dark" id='btn+'>></button>
+		</div>
 
-	// /* check connection */
-	// if (mysqli_connect_errno()) {
-	// printf("Connect failed: %s\n", mysqli_connect_error());
-	// exit();
-	// }
+		<div class="table-div table-responsive" style="height: 675px">	
+			<table class="table" cellpadding="24px">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col" style="text-align: center;">Heure</th>
+						<th scope="col" style="text-align: center;">Lundi</th>
+						<th scope="col" style="text-align: center;">Mardi</th>
+						<th scope="col" style="text-align: center;">Mercredi</th>
+						<th scope="col" style="text-align: center;">Jeudi</th>
+						<th scope="col" style="text-align: center;">Vendredi</th>
+						<th scope="col" style="text-align: center;">Samedi</th>
+						<th scope="col" style="text-align: center;">Dimanche</th>
+					</tr>
+				</thead>
+				<tbody id='table_body'>
+				</tbody>
+			</table>
+		</div>
 
-	// $requete_sql = "SELECT DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION FROM events WHERE DTSTART = \"2020-06-29 14:30:00\"";
-	// $result = mysqli_query($link, $requete_sql);
+		<div class="modal fade" tabindex="-1" role="dialog" id="EventModal">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Modification évènement</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<form id="edit_event_form" method="POST" action="/EDT/php/edit_event.php">
+								<label class="col-form-label" for="event_dtstart">Début </label>
+								<input class="form-control" type="text" id="event_dtstart" placeholder="Début" value=""/>
 
-	// /* numeric array */
-	// $row = mysqli_fetch_array($result, MYSQLI_NUM);
-	// /*printf ("%s %s %s %s\n", $row[0], $row[1]);*/
+								<label class="col-form-label" for="event_dtend">Fin </label>
+								<input class="form-control" type="text" id="event_dtend" value="" placeholder="Fin"/>
 
-	// $date_debut = $row[0];
-	// $date_fin =$row[1];
-	// $titre_activite =$row[2];
-	// $location =$row[3];
-	// $description =$row[4];
-	// printf ("%s %s %s %s %s\n", $date_debut, $date_fin, $titre_activite, $location, $description);
+								<label class="col-form-label" for="event_summary">Résumé </label>
+								<input class="form-control" type="text" id="event_summary" value="" placeholder="Résumé"/>
 
-	// $intervalle = strtotime($date_fin)-strtotime($date_debut); /*strtotime converti une date anglaise qui est un string en timestamp ( le nombre de seconde entre la date et le 1er janvier 1970 00:00:00 GMT))*/
-	// /*$intervalle est en seconde*/
-	// $intervalle_min = $intervalle/60; /*convertit en minute*/
-	// $intervalle_case = $intervalle_min/15; /*convertit en nombre de case, une case est égale à 15 min*/
-	// echo "intervalle case : $intervalle_case";
+								<label class="col-form-label" for="event_location">Localisation </label>
+								<input class="form-control" type="text" id="event_location" value="" placeholder="Localisation"/>
 
+								<label class="col-form-label" for="event_description">Description </label>
+								<input class="form-control" type="text" id="event_description" value="" placeholder="Description"/>
 
-	// /* free result set */
-	// mysqli_free_result($result);
+								<label class="col-form-label" for="event_id_event">Id </label>
+								<input class="form-control" type="text" id="event_id_event" value="" placeholder="Id" readonly/>
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button id="edit_event_submit" type="button" class="btn btn-primary">Modifier</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<?php
+		$hostname ="sql7.freemysqlhosting.net:3306";
+		$username="sql7336475";
+		$password="ItBWtR3xM5";
+		$db="sql7336475";
 
-	// /* close connection */
-	// mysqli_close($link);
+		$link = mysqli_connect($hostname, $username, $password, $db);
 
-	// /*rowspan : https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_td_rowspan */
+		/* check connection */
+		if (mysqli_connect_errno()) {
+			printf("Connect failed: %s\n", mysqli_connect_error());
+		exit();
+		}
 
-?>
+		$sql = "SELECT DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION, id FROM events";
+		$result = mysqli_query($link, $sql);
+		$res = $result -> fetch_all(MYSQLI_ASSOC);
 
-<style>
-<?php 
-include "../css/bootstrap/css/bootstrap.min.css";
-include '../css/page0.css'; 
-?>
-</style>
-  
+		function create_tablebody(){
+			$array_hours = array('00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23');
+			$array_min = array('00', '15', '30', '45');
+			$array_day = array('1', '2', '3', '4', '5', '6', '7');
 
-<div class="row">
-  <div class="col-lg-6">
-    <h1>EDT</span></h1>
-  </div>
-</div>
+			$html = "";
 
-<div class="row">
-	<table id="jour">
-		<?php
-		    $jour = array(null, "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
-		    $rdv["Lundi"]["9:30"] = "Maths";
-		    echo "<tr><th>Heure</th>";
-		    for($x = 1; $x < 6; $x++){
-		        echo "<th>".$jour[$x]."</th>";
-		    }
-		    echo "</tr>";
+			foreach ($array_hours as $hour) {
+				foreach ($array_min as $min) {
+					if (array_search($min, $array_min) == 0){//Index == 0 -> hour:00
+						//Row label full hour
+						$html = $html." "."<tr class='full-hour'>";
+						$html = $html." "."<td style='font-weight:bold;'>".$hour.":".$min."</td>";
+					}
+					else{
+						//Row label
+						$html = $html." "."<tr><td></td>";
+					}
 
-		    for($j = 7; $j < 20.75; $j += 0.25) {
-		        echo "<tr>";
-		        for($i = 0; $i <= 5; $i++) {
-					if($i == 0) {
-						$heure=floor($j);
-						$decimal=$j-$heure;
-						$min=$decimal*60;
-						if ($min==0){
-							$min="00";
-						}
-		                echo "<td class=\"time\"><div class=\"heure_content\">".$heure.":".$min."-</div></td>";
-		            }
-		            else if($i == 1){
-						$date = strtotime($date_debut);
-						$heure_cours = date('H', $date);
-						$min_cours = date('i', $date);
-						if($heure == $heure_cours && $min==$min_cours){
-							echo "<td><div class=\"truc_jaune\" rowspan=\"$intervalle_case\"> truc </div></td>";
-						}
-						else{
-							echo "<td><div class=\"truc\"> truc </div></td>";
-						}
-		            }else{
-		            	echo "<td><div class=\"truc\"> truc </div></td>";
-		            }
+					foreach ($array_day as $day) {
+						$html = $html." "."<td id='td-".$day."-".$hour.$min."'><div id='div-".$day."-".$hour.$min."'></div> </td>";
+					}
+					$html = $html." "."</tr>";
+				}
+			}
+		return $html;
+		}
+	?>
 
-		            
-		        }
-		        echo "</tr>";
-		    }
-		    echo "<tr><td class=\"time\"><div class=\"heure_content derniere-heure\">20:45_</div></td>";
-		    echo "<td><div class=\"truc\"> truc </div></td>";
-		    echo "<td><div class=\"truc\"> truc </div></td>";
-		    echo "<td><div class=\"truc\"> truc </div></td>";
-		    echo "<td><div class=\"truc\"> truc </div></td>";
-		    echo "<td><div class=\"truc\"> truc </div></td>";
-		    echo "</tr>";
-		?>
-	</table>
-</div>
-		  
+	<script>
+		var numWeeks = 0;
+		var current_week = ISO8601_week_no(addDays(0, numWeeks));
+		var php_array = <?php echo json_encode($res); ?>;
+
+		function reset_tbody(){$('#table_body').html(<?php echo json_encode(create_tablebody()); ?>);}
+
+		function display_events(){
+			reset_tbody();
+			var dict_days = {'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6, 'Sun': 7};
+
+			for(i in php_array){
+				var dtstart = php_array[i]['DTSTART'];
+				var dtend = php_array[i]['DTEND'];
+				var summary = php_array[i]['SUMMARY'];
+				var location = php_array[i]['LOCATION'];
+				var description = php_array[i]['DESCRIPTION'];
+				var id_event = php_array[i]['id']
+
+				var nb_rows = quarters_np(dtstart, dtend);
+				var week_date = ISO8601_week_no(new Date(dtstart));
+
+				if (week_date == current_week){
+					var id_day = dict_days[String(new Date(dtstart)).split(" ")[0]];
+					var date_hour = dtstart.split(" ")[1].split(":");
+					var id = String("div-"+id_day+"-"+date_hour[0]+date_hour[1]);
+
+					var html = "<div style='font-weight: bold'>"+summary+"</div><br>Début : <div>"+dtstart+"</div>Fin : <div>"+dtend+"</div><br>Localisation : <div>"+location+"</div><br>Description : <div>"+description+"</div><div style='display:none'>"+id_event+"</div>";
+					$('#'+id).append(html);
+
+					delete_td(id, id_day, nb_rows);
+
+					$('#'+id).parent().attr('rowspan', nb_rows);
+					$('#'+id).css('height', 17*nb_rows);
+				}
+			}
+			$('.table-div').animate({scrollTop:$('#'+first_event()).offset().top}, 'slow')
+		}
+
+		function first_event(){
+			return $('td>div:not(:empty):first').attr('id');
+		}
+
+		function delete_td(id, id_day, nb_rows){
+				var i = 0;
+				var current_td = $('#'+id).parent();
+
+			while (i < nb_rows){
+				var current_tr = current_td.parent().children('td');
+				var next_td = current_tr.parent().closest('tr').next('tr').find("td[id^='td-"+id_day+"-']");
+
+				if ($(current_td).children('div').attr('id') != id){
+					$(current_td).remove();
+				}
+				current_td = next_td;
+				i++;
+			}
+		}
+
+		function quarters_np(dtstart, dtend){
+			var tstart = new Date(dtstart);
+			var tend = new Date(dtend);
+
+			var timeStart = tstart.getMinutes() + 60*tstart.getHours();
+			var timeEnd = tend.getMinutes() + 60*tend.getHours();
+
+			return (timeEnd - timeStart)/15;
+		}
+
+		function ISO8601_week_no(dt) {
+			 var tdt = new Date(dt.valueOf());
+			 var dayn = (dt.getDay() + 6) % 7;
+			 tdt.setDate(tdt.getDate() - dayn + 3);
+			 var firstThursday = tdt.valueOf();
+			 tdt.setMonth(0, 1);
+			 if (tdt.getDay() !== 4) 
+				 {
+				tdt.setMonth(0, 1 + ((4 - tdt.getDay()) + 7) % 7);
+					}
+			 return 1 + Math.ceil((firstThursday - tdt) / 604800000);
+		 }
+
+		function addDays(numDays, numWeeks) {
+			dateObj = new Date();
+			dateObj.setDate(dateObj.getDate() + numDays + numWeeks*7 );
+			return dateObj;
+		}
+
+	function update_table(){
+		document.getElementById("btn_week").innerHTML = "Semaine "+current_week;
+		display_events();
+	};
+
+		document.getElementById('btn+').onclick = function() {
+			numWeeks += 1;
+			current_week = ISO8601_week_no(addDays(0, numWeeks));
+			update_table();
+		}
+
+		document.getElementById('btn-').onclick = function() {
+			numWeeks += -1;
+			current_week = ISO8601_week_no(addDays(0, numWeeks));
+			update_table();
+		}
+
+	$('.table').click(function(){
+		$('div[id^=div-]').click(function(){
+			var children = $(this).children('div');
+			$("#EventModal").modal('show');
+			$('input[id=event_summary]').val( $(children[0]).text() );
+			$('input[id=event_dtstart]').val( $(children[1]).text() );
+			$('input[id=event_dtend]').val( $(children[2]).text() );
+			$('input[id=event_location]').val( $(children[3]).text() );
+			$('input[id=event_description]').val( $(children[4]).text() );
+			$('input[id=event_id_event]').val( $(children[5]).text() );
+		})
+	});
+
+	$("#edit_event_submit").click(function() {
+		$("#edit_event_form").submit();
+	});
+
+	$(document).ready(update_table());
+	</script>
+</html>
