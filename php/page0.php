@@ -45,29 +45,30 @@
 					<div class="modal-body">
 						<div class="form-group">
 							<form id="edit_event_form" method="POST" action="/EDT/php/edit_event.php">
+								<label class="col-form-label" for="event_id_event">Id </label>
+								<input class="form-control" type="text" id="event_id_event" value="" name="id" placeholder="Id" readonly/>
+								
 								<label class="col-form-label" for="event_dtstart">Début </label>
-								<input class="form-control" type="text" id="event_dtstart" placeholder="Début" value=""/>
+								<input class="form-control" type="text" id="event_dtstart" name = "event_dtstart" placeholder="Début" value=""/>
 
 								<label class="col-form-label" for="event_dtend">Fin </label>
-								<input class="form-control" type="text" id="event_dtend" value="" placeholder="Fin"/>
+								<input class="form-control" type="text" id="event_dtend" value="" name="event_dtend" placeholder="Fin"/>
 
 								<label class="col-form-label" for="event_summary">Résumé </label>
-								<input class="form-control" type="text" id="event_summary" value="" placeholder="Résumé"/>
+								<input class="form-control" type="text" id="event_summary" name = "event_summary" value="" placeholder="Résumé"/>
 
 								<label class="col-form-label" for="event_location">Localisation </label>
-								<input class="form-control" type="text" id="event_location" value="" placeholder="Localisation"/>
+								<input class="form-control" type="text" id="event_location" value="" name="event_location" placeholder="Localisation"/>
 
-								<label class="col-form-label" for="event_description">Description </label>
-								<input class="form-control" type="text" id="event_description" value="" placeholder="Description"/>
-
-								<label class="col-form-label" for="event_id_event">Id </label>
-								<input class="form-control" type="text" id="event_id_event" value="" placeholder="Id" readonly/>
+								<label class="col-form-label" for="event_description" >Description </label>
+								<input class="form-control" type="text" id="event_description" value="" placeholder="Description">
 							</form>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button id="edit_event_submit" type="button" class="btn btn-primary">Modifier</button>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
 					</div>
 				</div>
 			</div>
@@ -138,6 +139,8 @@
 				var location = php_array[i]['LOCATION'];
 				var description = php_array[i]['DESCRIPTION'];
 				var id_event = php_array[i]['id']
+
+				var description = description.replace("IDU"," ")
 
 				var nb_rows = quarters_np(dtstart, dtend);
 				var week_date = ISO8601_week_no(new Date(dtstart));
