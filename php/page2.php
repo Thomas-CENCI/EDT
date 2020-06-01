@@ -21,8 +21,8 @@ if(isset($_POST["submit"])){
 	$description = $_POST["description"];
 
 
-	$SQL = "INSERT INTO modification (type, nomEvent, dateEvent, enseignantEvent, salleEvent, heureDebut, heureFin, groupeEvent, descriptionEvent)
-			VALUES (1, '".$nom."', '".$date."', '".$enseignant."', '".$salle."', '".$heureDebut."', '".$heureFin."', '".$groupe."', '".$description."')";
+	$SQL = "INSERT INTO modification (identifiantUtilisateur, type, nomEvent, dateEvent, enseignantEvent, salleEvent, heureDebut, heureFin, groupeEvent, descriptionEvent)
+			VALUES ('".$_SESSION['login']."', 1, '".$nom."', '".$date."', '".$enseignant."', '".$salle."', '".$heureDebut."', '".$heureFin."', '".$groupe."', '".$description."')";
 	mysqli_query($conn, $SQL);
 }
 
