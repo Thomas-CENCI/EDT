@@ -144,8 +144,6 @@
 				var description = php_array[i]['DESCRIPTION'];
 				var id_event = php_array[i]['id']
 
-				var description = description.replace("IDU"," ")
-
 				var nb_rows = quarters_np(dtstart, dtend);//Nombre de balises td
 				var week_date = ISO8601_week_no(new Date(dtstart));
 
@@ -160,7 +158,7 @@
 					delete_td(id, id_day, nb_rows);
 
 					$('#'+id).parent().attr('rowspan', nb_rows);
-					$('#'+id).css('height', 17*nb_rows);
+					$('#'+id).css('height', 17*nb_rows);//17 : td height
 				}
 			}
 			$('.table-div').animate({scrollTop:$('#'+first_event()).offset().top}, 'slow')
