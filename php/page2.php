@@ -56,7 +56,7 @@ if(isset($_POST["submit"])){
 			<div>
 			  	<label for="enseignant">Enseignant : </label></br>
 				<select class="form-control"  id="enseignant" name="enseignant">
-					<?php foreach($requete_enseignant as $enseignant){echo "<option  value='".$enseignant['nom']." + ".$enseignant['prenom']."'>".$enseignant['nom']." ".$enseignant['prenom']."</option>";} ?>
+					<?php foreach($requete_enseignant as $enseignant){echo "<option  value='".$enseignant['nom']." ".$enseignant['prenom']."'>".$enseignant['nom']." ".$enseignant['prenom']."</option>";} ?>
 				</select>
 			</div>
 			<div>
@@ -70,12 +70,10 @@ if(isset($_POST["submit"])){
 				<input type='date' name='date' id='date' class='form-control'/></br>
 			</div>
 			<div>
-			<div>
 			  	<label for="salle">Salle : </label></br>
 				<select class="form-control"  id="salle" name="salle">
 					<?php foreach($requete_salle as $salle){echo "<option  value='".$salle['nom']."'>".$salle['nom']."</option>";} ?>
 				</select>
-			</div>
 			</div>
 			<div>
 				</br><label for='hd'>Début : </label></br>
