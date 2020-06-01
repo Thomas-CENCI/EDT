@@ -19,10 +19,13 @@ if(isset($_POST["submit"])){
 	$heureDebut = $_POST["hd"];
 	$heureFin = $_POST["hf"];
 	$description = $_POST["description"];
+	$dateD = $_POST["date"]." ".$heureDebut.":00";
+	$dateF = $_POST["date"]." ".$heureFin.":00";
 
 
-	$SQL = "INSERT INTO modification (type, nomEvent, dateEvent, enseignantEvent, salleEvent, heureDebut, heureFin, groupeEvent, descriptionEvent)
-			VALUES (1, '".$nom."', '".$date."', '".$enseignant."', '".$salle."', '".$heureDebut."', '".$heureFin."', '".$groupe."', '".$description."')";
+	$SQL = "INSERT INTO modification (type, identifiantUtilisateur, nomEvent, enseignantEvent, salleEvent, groupeEvent, descriptionEvent,dateEventD,dateEventF)
+			VALUES (1,'".$_SESSION['login']."', '".$nom."', '".$enseignant."', '".$salle."', '".$groupe."', '".$description."','".$dateD."','".$dateF."')";
+
 	mysqli_query($conn, $SQL);
 }
 
@@ -76,3 +79,4 @@ if(isset($_POST["submit"])){
 		</form>
 	</div>
 </html>
+
