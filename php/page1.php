@@ -5,8 +5,9 @@ $password="ItBWtR3xM5";
 $db="sql7336475";
 
 
+ $link = mysqli_connect($hostname, $username, $password, $db);
+
 if(isset($_POST['refuser_bouton'])){ // quand on refuse une demande
-  $link = mysqli_connect($hostname, $username, $password, $db);
     
     /* check connection */
     if (mysqli_connect_errno()) {
@@ -22,13 +23,11 @@ if(isset($_POST['refuser_bouton'])){ // quand on refuse une demande
   mysqli_free_result($result_refus);
   
   /* close connection */
-  mysqli_close($link);
   echo "<div class=\"alert alert-success\" role=\"alert\">Demande supprimée</div>";
 
 }
 
 if(isset($_POST['accepter_creation_bouton'])){
-  $link = mysqli_connect($hostname, $username, $password, $db);
     
     /* check connection */
     if (mysqli_connect_errno()) {
@@ -53,8 +52,6 @@ if(isset($_POST['accepter_creation_bouton'])){
     /* free result set */
     mysqli_free_result($result_verifie_compatibilite);
 
-    /* close connection */
-    mysqli_close($link);
 
     if($nb_rows ==0){ //on regarde si le nombre de rows est égale à 0 (ça veut dire que l'évènement que l'on souhaite ajouter ne va pas se chevaucher sur un autre)
         $link = mysqli_connect($hostname, $username, $password, $db);
@@ -63,21 +60,13 @@ if(isset($_POST['accepter_creation_bouton'])){
             printf("Connect failed: %s\n", mysqli_connect_error());
             exit();
         }
-        $requete_ajout_evenement_sql = "INSERT INTO events(DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION) VALUES ('$DTSTART', '$DTEND', '$SUMMARY', '$LOCATION', '$DESCRIPTION'); INSERT INTO events2salle(identifiantEvents, identifiantSalle) SELECT LAST_INSERT_ID(), salle.identifiant FROM salle WHERE salle.nom LIKE '$LOCATION';"; //on ajoute l'évènement dans les 2 tables
 
-        echo $requete_ajout_evenement_sql;
+        //on ajoute l'évènement dans les 2 tables
+        $requete_ajout_evenement_sql1 = "INSERT INTO events(DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION) VALUES ('$DTSTART', '$DTEND', '$SUMMARY', '$LOCATION', '$DESCRIPTION');"; 
 
-        $result_ajout_evenement = mysqli_query($link, $requete_ajout_evenement_sql);
-        echo "resultat : ". $result_ajout_evenement;
-
-         /* free result set */
-        mysqli_free_result($result_verifie_compatibilite);
-
-        /* close connection */
-        mysqli_close($link);
-
-        // on supprime la demande d'évènement que l'on vient de traiter
-        $link = mysqli_connect($hostname, $username, $password, $db);
+        $requete_ajout_evenement_sql2 = "INSERT INTO events2salle(identifiantEvents, identifiantSalle) SELECT LAST_INSERT_ID(), salle.identifiant FROM salle WHERE salle.nom LIKE '$LOCATION';";
+        mysqli_query($link, $requete_ajout_evenement_sql1);
+        mysqli_query($link, $requete_ajout_evenement_sql2);
         
         /* check connection */
         if (mysqli_connect_errno()) {
@@ -91,9 +80,7 @@ if(isset($_POST['accepter_creation_bouton'])){
 
        /* free result set */
         mysqli_free_result($result_refus);
-      
-      /* close connection */
-        mysqli_close($link);
+
         echo "<div class=\"alert alert-success\" role=\"alert\">Demande acceptée</div>";
     }else{
         echo "<div class=\"alert alert-danger\" role=\"alert\">Demande impossible</div>";
@@ -112,8 +99,6 @@ if(isset($_POST['accepter_creation_bouton'])){
 
 <?php 
 
-  $link = mysqli_connect($hostname, $username, $password, $db);
-
   /* check connection */
   if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
@@ -124,7 +109,6 @@ if(isset($_POST['accepter_creation_bouton'])){
     $requete_modification_sql = "SELECT modification.identifiant, utilisateur.identifiant, events.SUMMARY, events.DTSTART, events.DTEND, events.LOCATION, events.description, modification.salleEvent, modification.dateEventD, modification.dateEventF FROM utilisateur, events,modification WHERE (modification.identifiantUtilisateur LIKE utilisateur.identifiant) and(events.id = modification.identifiantCours) and modification.type = 2";
     $result_modification = mysqli_query($link, $requete_modification_sql);
     $nb_champs1 = mysqli_field_count($link); 
-    echo "nb :".$nb_champs1;
 
   ?>
 <div class="container">
@@ -172,12 +156,7 @@ if(isset($_POST['accepter_creation_bouton'])){
  <?php /* free result set */
     mysqli_free_result($result_modification);
 
-    /* close connection */
-    mysqli_close($link); 
-
   //requete affichage création évènement
-
-  $link = mysqli_connect($hostname, $username, $password, $db);
 
   /* check connection */
   if (mysqli_connect_errno()) {
@@ -232,8 +211,6 @@ if(isset($_POST['accepter_creation_bouton'])){
   </div>
 
  <?php /* free result set */
-    mysqli_free_result($result_modification);
+    mysqli_free_result($result_creation);
 
-    /* close connection */
-    mysqli_close($link); 
   ?>
