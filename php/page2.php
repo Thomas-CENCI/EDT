@@ -32,81 +32,47 @@ if(isset($_POST["submit"])){
 <html>
 	<head>
 		<meta name=description content="Demande de création d'un événement">
+		<link rel="stylesheet" href="../css/page2.css"> <!-- il faudra changer avec la page0.css je pense -->
 	</head>
-	<form  method='POST' action='/EDT/php/edt_main.php?page=3'>
-	  	<div style="position:relative; border-spacing: 10px">
-
-			<?php
-				echo "<label for='nom'>Nom de l'évènement : </label>";
-				echo "<input type='text' name='nom' id='nom'/>";
-	    	?>
-
-	  	</div>
-
-	  	<div style="position:relative; border-spacing: 10px">
-
-			<?php
-				echo "<label for='enseignant'>Nom de l'enseignant : </label>";
-				echo "<input type='text' name='enseignant' id='enseignant'/>";
-	    	?>
-
-	  	</div>
-
-	  	<div style="position:relative; border-spacing: 10px">
-
-			<?php
-				echo "<label for='groupe'>Groupe(s) concerné(s) : </label>";
-				echo "<input type='text' name='groupe' id='groupe'/>";
-	    	?>
-
-	  	</div>
-
-	  	<div style="position:relative; border-spacing: 10px">
-
-			<?php
-				echo "<label for='date'>Date : </label>";
-				echo "<input type='date' name='date' id='date'/>";
-
-				// date_create_from_format ( "d/m/Y" , $date [, DateTimeZone "e" ] ) : DateTime // Pas sur de cette conversion
-	    	?>
-
-	  	</div>
-
-	  	<label for="salle">Nom de la salle : </label>
-		<select class="form-control" id="salle" name="salle">
-			<?php
-			foreach($requete_salle as $salle){
-				echo "<option  value='".$salle['nom']."'>".$salle['nom']."</option>";
-			}
-	    	?>
-		</select>
-
-	  	<div style="position:relative; border-spacing: 10px">
-
-			<?php
-				echo "<label for='hd'>Heure de début : </label>";
-				echo "<input type='time' name='hd' id='hd'/>";
-
-				// date_create_from_format ( "H:i" , $heureDebut [, DateTimeZone "e" ] ) : DateTime // Pas sur de cette conversion
-	    	?>
-
-	  	</div>
-
-	  	<div style="position:relative; border-spacing: 10px">
-			<?php
-				echo "<label for='hf'>Heure de fin : </label>";
-				echo "<input type='time' name='hf' id='hf'/>";
-				// date_create_from_format ( "H:i" , $heureFin [, DateTimeZone "e" ] ) : DateTime // Pas sur de cette conversion
-	    	?>
-	  	</div>
-
-	  	<div style="position:relative; border-spacing: 10px">
-			<?php
-				echo "<label for='description'>Description : </label>";
-				echo "<input type='text' name='description' id='description'/>";
-	    	?>
-	  	</div>
-
-		<input name = "submit" type="submit" value="Valider" style="float: right; width: 25%;"></input>
-	</form>
+	<div class="basic_form">
+		<form  method='POST' action='/EDT/php/edt_main.php?page=2'>
+			<div>
+				<label for='nom'>Evénement : </label>
+				<input type='text' name='nom' id='nom'/>
+			</div>
+			<div>
+				<label for='enseignant'>Enseignant : </label>
+				<input type='text' name='enseignant' id='enseignant'/>
+			</div>
+			<div>
+				<label for='groupe'>Groupe(s) : </label>
+				<input type='text' name='groupe' id='groupe'/>
+			</div>
+			<div>
+				<label for='date'>Date : </label>
+				<input type='date' name='date' id='date'/>
+			</div>
+			<div>
+			  	<label for="salle">Salle : </label>
+				<select class="form-control"  id="salle" name="salle">
+					<?php foreach($requete_salle as $salle){echo "<option  value='".$salle['nom']."'>".$salle['nom']."</option>";} ?>
+				</select>
+			</div>
+			<div>
+				<label for='hd'>Début : </label>
+				<input type='time' name='hd' id='hd'/>
+			</div>
+			<div>
+				<label for='hf'>Fin : </label>
+				<input type='time' name='hf' id='hf'/>
+			</div>
+			<div>
+				<label for='description'>Description :</label>
+				<input type='text' name='description' id='description'/>
+		  	</div>
+		  	<div class="button">
+				<button class="btn btn-secondary" name="submit" type="submit" value="Valider">Valider</button>
+			</div>
+		</form>
+	</div>
 </html>
