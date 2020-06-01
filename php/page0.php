@@ -52,21 +52,24 @@
 								<input class="form-control" type="text" id="event_dtstart" name = "event_dtstart" placeholder="Début" value=""/>
 
 								<label class="col-form-label" for="event_dtend">Fin </label>
-								<input class="form-control" type="text" id="event_dtend" value="" name="event_dtend" placeholder="Fin"/>
+								<input class="form-control" type="text" id="event_dtend" value="" name="event_dtend" placeholder="Fin"  />
 
 								<label class="col-form-label" for="event_summary">Résumé </label>
-								<input class="form-control" type="text" id="event_summary" name = "event_summary" value="" placeholder="Résumé"/>
+								<input class="form-control" type="text" id="event_summary" name = "event_summary" value="" placeholder="Résumé" />
 
 								<label class="col-form-label" for="event_location">Localisation </label>
 								<input class="form-control" type="text" id="event_location" value="" name="event_location" placeholder="Localisation"/>
 
-								<label class="col-form-label" for="event_description" >Description </label>
-								<input class="form-control" type="text" id="event_description" value="" placeholder="Description">
+								<label class="col-form-label" for="event_description" style="display:none;" >Description </label>
+								<input class="form-control" type="text" id="event_description" value="" placeholder="Description" style="display:none;">
 							</form>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button id="edit_event_submit" type="button" class="btn btn-primary">Modifier</button>
+						
+						<button id="edit_event_submit" type="button" class="btn btn-primary" name="edit_event_submit">Modifier</button>
+						<button id = "del" type="button" class="btn btn-primary" name="del">Supprimer </button>
+					
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
 
 					</div>
@@ -150,7 +153,7 @@
 					var date_hour = dtstart.split(" ")[1].split(":");
 					var id = String("div-"+id_day+"-"+date_hour[0]+date_hour[1]);
 
-					var html = "<div style='font-weight: bold'>"+summary+"</div><br>Début : <div>"+dtstart+"</div>Fin : <div>"+dtend+"</div><br>Localisation : <div>"+location+"</div><br>Description : <div>"+description+"</div><div style='display:none'>"+id_event+"</div>";
+					var html = "<div style='font-weight: bold'>"+summary+"</div><br>Début : <div>"+dtstart+"</div>Fin : <div>"+dtend+"</div><br>Localisation : <div>"+location+"</div><div style='display:none'>"+description+"</div><div style='display:none'>"+id_event+"</div>";
 					$('#'+id).append(html);
 
 					delete_td(id, id_day, nb_rows);
@@ -242,7 +245,14 @@
 	});
 
 	$("#edit_event_submit").click(function() {
+		<?php $_SESSION["button"] = 1; ?>
 		$("#edit_event_form").submit();
+	});
+	$("#del").click(function() {
+		<?php $_SESSION["button"] = 2;?>
+		$("#edit_event_form").submit();
+		
+
 	});
 
 	$(document).ready(update_table());
