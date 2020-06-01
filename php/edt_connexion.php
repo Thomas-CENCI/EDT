@@ -16,12 +16,15 @@
         /*set la  variable global $_SESSION['status'] en fonction de l'utilisateur connecté*/
         if ($nb_status==1){ /*c'est l'admin*/
             $_SESSION['status']="admin";
+         $_SESSION['login']=$_POST['login'];
         }
         else if ($nb_status==2){ /*c'est un enseignant */
             $_SESSION['status']="enseignant";
+         $_SESSION['login']=$_POST['login'];
         }
         else{ /*c'est un étudiant*/
             $_SESSION['status']="etudiant";
+         $_SESSION['login']=$_POST['login'];
         }
     }
     
@@ -100,21 +103,21 @@
                                     <img src="../image/1.jpg" class="d-block w-100" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Bienvenue sur votre site d'emploi du temps</h5>
-                                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                        <p>Vulnerant omnes, ultima necat</p>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
                                     <img src="../image/2.jpg" class="d-block w-100" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Consultez votre emploie du temps</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        <p>Vulnerant omnes, ultima necat</p>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
                                     <img src="../image/3.jpg" class="d-block w-100" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Planifiez vos activités</h5>
-                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                        <p>Vulnerant omnes, ultima necat</p>
                                     </div>
                                 </div>
                             </div>
