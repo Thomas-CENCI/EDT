@@ -38,8 +38,8 @@
              $requete_sql="SELECT motsDePasse FROM utilisateur WHERE      identifiant LIKE '" . $_POST['login'] . "'";
              $result = mysql_query($requete_sql) or die("Requête invalide: ". mysql_error()."\n".$requete_sql);
              $data = mysql_fetch_row($result);*/
-            echo $row[0] . " ". $row[1]. " ".$row[2];
-            echo "password : " . $_POST['password'];
+            //echo $row[0] . " ". $row[1]. " ".$row[2];
+            //echo "password : " . $_POST['password'];
             if($row[1]==$_POST['password']){
                 $_SESSION['login']=$_POST['login'];
                 $_SESSION['password']=$_POST['password'];
