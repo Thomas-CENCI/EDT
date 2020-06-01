@@ -1,112 +1,82 @@
 <?php
+	$hostname ="sql7.freemysqlhosting.net:3306";
+	$username="sql7336475";
+	$password="ItBWtR3xM5";
+	$db="sql7336475";
 
-$hostname ="sql7.freemysqlhosting.net:3306";
-$username="sql7336475";
-$password="ItBWtR3xM5";
-$db="sql7336475";
-$conn = new mysqli($hostname, $username, $password, $db) or die('Error connecting to database');
+	$link = mysqli_connect($hostname, $username, $password, $db);
 
-$SQL_salle = "SELECT salle.nom FROM salle";
-$response = mysqli_query($conn, $SQL_salle);
-$requete_salle = mysqli_fetch_all($response, MYSQLI_ASSOC);
+	/* check connection */
+	if (mysqli_connect_errno()) {
+		printf("Connect failed: %s\n", mysqli_connect_error());
+	exit();
+	}
+	$requete = $_GET["barre_de_recherche"];
 
-if(isset($_POST["submit"])){
-	$nom = $_POST["nom"];
-	$enseignant = $_POST["enseignant"];
-	$groupe = $_POST["groupe"];
-	$salle = $_POST["salle"];
-	$date = $_POST["date"];
-	$heureDebut = $_POST["hd"];
-	$heureFin = $_POST["hf"];
-	$description = $_POST["description"]
+	$requete_event_sql = "SELECT DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION, id FROM events WHERE (DTSTART LIKE '%$requete%') OR (DTEND LIKE '%$requete%') OR (SUMMARY LIKE '%$requete%') OR (LOCATION LIKE '%$requete %') OR (DESCRIPTION LIKE '%$requete%')";
+	$result_event = mysqli_query($link, $requete_event_sql);
 
+	// est ce qu'il faut aussi faire les recherches sur les salles, groupres et utilisateur ??
 
-	$SQL = "INSERT INTO modification (type, nomEvent, dateEvent, enseignantEvent, salleEvent, heureDebut, heureFin, groupeEvent, descriptionEvent)
-			VALUES (1, '".$nom."', '".$date."', '".$enseignant."', '".$salle."', '".$heureDebut."', '".$heureFin."', '".$groupe."', '".$description."')";
-	mysqli_query($conn, $SQL);
-}
 
 ?>
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta name=description content="Demande de création d'un événement">
-	</head>
-	<form  method='POST' action='/EDT/php/edt_main.php?page=3'>
-	  	<div style="position:relative; border-spacing: 10px">
+<div class="row">
+  <div class="col-lg-12">
+    <h1>Résultat de la recherche : <?=$requete;?></span></h1>
+  </div>
+</div>
 
-			<?php
-				echo "<label for='nom'>Nom de l'évènement : </label>";
-				echo "<input type='text' name='nom' id='nom'/>";
-	    	?>
+<div class="container">
+<?php $i=0; ?>
+<div class="row">
+<?php while($row = mysqli_fetch_array($result_event, MYSQLI_NUM)): ?> <!-- afficher message quand il n'y pas de résultat-->
+	<?php $id_event = $row[5];?>
+	<div class="col-lg-4 col-md-6">
+		<div class="card" style="width: 18rem; margin: 10px;">
+			<?php $module = substr($row[2],0, 7); ?>
+		  <?php echo "<img src=\"../image/$module.jpg\" class=\"card-img-top\" alt=\"$module\">"; ?> <!-- on modifie l'image selon le module-->
+		  <div class="card-body">
+		    <h5 class="card-title"> <?=$row[2];?> </h5>
+		    <?php $row[4] = str_replace('\\n', ' ', $row[4]); ?>
+		    <p class="card-text"><?=$row[4];?></p>
+		    <?php echo "<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#modal_de_$id_event\"> Plus d'info </button>"; ?> <!-- bouton qui ouvre le modal NB : on prend $id event car unique-->
+		  </div>
+		</div>
 
-	  	</div>
+ 		<!-- Modal qui s'affiche uniquement si on appui sur le bouton "Plus d'info"-->
+		<?php echo "<div class=\"modal fade\" id=\"modal_de_$id_event\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">"; ?>
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <?php echo "<h5 class=\"modal-title\" id=\"exampleModalLabel\">$row[2]</h5>"; ?>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		      	<?="Début: $row[0]</br>";?>
+		      	<?="Fin: $row[1]</br>";?>
+		      	<?="Localisation: $row[3]</br>";?>
+		        <?="Description: $row[4]";?>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div> 
+	</div>
+<?php endwhile; ?>
+</div>
 
-	  	<div style="position:relative; border-spacing: 10px">
+</div>
 
-			<?php
-				echo "<label for='enseignant'>Nom de l'enseignant : </label>";
-				echo "<input type='text' name='enseignant' id='enseignant'/>";
-	    	?>
+<?php
+		/* free result set */
+		mysqli_free_result($result_event);
 
-	  	</div>
-
-	  	<div style="position:relative; border-spacing: 10px">
-
-			<?php
-				echo "<label for='groupe'>Groupe(s) concerné(s) : </label>";
-				echo "<input type='text' name='groupe' id='groupe'/>";
-	    	?>
-
-	  	</div>
-
-	  	<div style="position:relative; border-spacing: 10px">
-
-			<?php
-				echo "<label for='date'>Date : </label>";
-				echo "<input type='date' name='date' id='date'/>";
-
-				// date_create_from_format ( "d/m/Y" , $date [, DateTimeZone "e" ] ) : DateTime // Pas sur de cette conversion
-	    	?>
-
-	  	</div>
-
-	  	<label for="salle">Nom de la salle : </label>
-		<select class="form-control" id="salle" name="salle">
-			<?php
-			foreach($requete_salle as $salle){
-				echo "<option  value='".$salle['nom']."'>".$salle['nom']."</option>";
-			}
-	    	?>
-		</select>
-
-	  	<div style="position:relative; border-spacing: 10px">
-
-			<?php
-				echo "<label for='hd'>Heure de début : </label>";
-				echo "<input type='time' name='hd' id='hd'/>";
-
-				// date_create_from_format ( "H:i" , $heureDebut [, DateTimeZone "e" ] ) : DateTime // Pas sur de cette conversion
-	    	?>
-
-	  	</div>
-
-	  	<div style="position:relative; border-spacing: 10px">
-			<?php
-				echo "<label for='hf'>Heure de fin : </label>";
-				echo "<input type='time' name='hf' id='hf'/>";
-				// date_create_from_format ( "H:i" , $heureFin [, DateTimeZone "e" ] ) : DateTime // Pas sur de cette conversion
-	    	?>
-	  	</div>
-
-	  	<div style="position:relative; border-spacing: 10px">
-			<?php
-				echo "<label for='description'>Description : </label>";
-				echo "<input type='text' name='description' id='description'/>";
-	    	?>
-	  	</div>
-
-		<input name = "submit" type="submit" value="Valider" style="float: right; width: 25%;"></input>
-	</form>
-</html>
+		/* close connection */
+		mysqli_close($link);
+?>

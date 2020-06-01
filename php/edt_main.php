@@ -7,7 +7,7 @@
         $page=$_GET["page"];
       }
 
-       $active = array(" "," "," "," ");
+       $active = array(" "," "," ");
        $active[$page]= "active";
 
     if(isset($_GET["deconnexion"])){
@@ -18,7 +18,7 @@
     }
 
     if(isset($_GET["recherche"])){
-    	$page=5; // on va à la page 5
+    	$page=3; // on va à la page 3
     }
 ?>
 
@@ -51,12 +51,9 @@
 		      			<?php echo "<li class=\"nav-item $active[1]\">"; ?>
 			        		<a class="nav-link" href="?page=1">Gestion cours</a> <!-- Permet à l'admin d'ajouter, de supprimer et de modifier des cours -->
 			      		</li>
-		      			<?php echo "<li class=\"nav-item $active[2]\">"; ?>
-			        		<a class="nav-link" href="?page=2">Demandes de cours</a> <!-- affiche toutes les demandes à traiter -->
-			      		</li>
 			      	<?php elseif($status == "enseignant" || $status =="etudiant"): ?>
-		      			<?php echo "<li class=\"nav-item $active[3]\">"; ?>
-			        		<a class="nav-link" href="?page=3">Demander des cours</a> <!-- Demander à l'damin d'ajouter, de supprimer ou de modifier des cours  -->
+		      			<?php echo "<li class=\"nav-item $active[2]\">"; ?>
+			        		<a class="nav-link" href="?page=2">Demander des cours</a> <!-- Demander à l'damin d'ajouter, de supprimer ou de modifier des cours  -->
 			      		</li>
 			      	<?php endif; ?>
 			      	<li class="nav-item dropdown">
