@@ -4,25 +4,32 @@ $username="sql7336475";
 $password="ItBWtR3xM5";
 $db="sql7336475";
 
-$link = mysqli_connect($hostname, $username, $password, $db);
 
-/* check connection */
-if (mysqli_connect_errno()) {
-  printf("Connect failed: %s\n", mysqli_connect_error());
-exit();
+if(isset($_POST['refuser_bouton'])){ // quand on refuse une demande
+  $link = mysqli_connect($hostname, $username, $password, $db);
+    
+    /* check connection */
+    if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+    }
+    
+  $id_row = $_POST['id_row'];
+  $requete_refuser_sql = "DELETE FROM modification WHERE identifiant = $id_row";
+  $result_refus = mysqli_query($link, $requete_refuser_sql);
+
+   /* free result set */
+  mysqli_free_result($result_refus);
+  
+  /* close connection */
+  mysqli_close($link);
+  echo "<div class=\"alert alert-success\" role=\"alert\">Demande supprimé.</div>";
+
 }
 
+if(isset($_POST['accepter_bouton'])){
 
-// requete affichage modification évènement
-$requete_modification_sql = "SELECT utilisateur.identifiant, events.SUMMARY, events.DTSTART, events.DTEND, events.LOCATION, events.description, modification.salleEvent, modification.dateEventD, modification.dateEventF FROM utilisateur, events,modification WHERE (modification.identifiantUtilisateur LIKE utilisateur.identifiant) and(events.id = modification.identifiantCours) and modification.type = 2
-";
-$result_modification = mysqli_query($link, $requete_modification_sql);
-$nb_champs1 = mysqli_field_count($link);
-
-//requete affichage création évènement
-$requete_creation_sql = "SELECT utilisateur.identifiant, modification.nomEvent, modification.DESCRIPTION, modification.dateEvent, modification.enseignantEvent, modification.salleEvent, modification.heureDebut, modification.heureFin, modification.groupeEvent FROM utilisateur, modification WHERE (modification.identifiantUtilisateur LIKE utilisateur.identifiant) and modification.type = 1";
-$result_creation = mysqli_query($link, $requete_creation_sql);
-$nb_champs2 = mysqli_field_count($link);
+}
 
 ?>
 
@@ -32,6 +39,24 @@ $nb_champs2 = mysqli_field_count($link);
 </head>
 
 <h1>Demandes de modifications d'évènement </h1>
+
+<?php 
+
+  $link = mysqli_connect($hostname, $username, $password, $db);
+
+  /* check connection */
+  if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+  exit();
+  }
+
+  // requete affichage modification évènement
+    $requete_modification_sql = "SELECT modification.identifiant, utilisateur.identifiant, events.SUMMARY, events.DTSTART, events.DTEND, events.LOCATION, events.description, modification.salleEvent, modification.dateEventD, modification.dateEventF FROM utilisateur, events,modification WHERE (modification.identifiantUtilisateur LIKE utilisateur.identifiant) and(events.id = modification.identifiantCours) and modification.type = 2
+    ";
+    $result_modification = mysqli_query($link, $requete_modification_sql);
+    $nb_champs1 = mysqli_field_count($link); 
+
+  ?>
 <div class="container">
   <div class="row">
     <div class="table-responsive">
@@ -53,16 +78,19 @@ $nb_champs2 = mysqli_field_count($link);
         <tbody>
           <?php while($row = mysqli_fetch_array($result_modification, MYSQLI_NUM)): ?>
             <tr>
-              <?php for($i=0; $i<$nb_champs1; $i++ ){
-                  if ($i==5){
-                    $row[$i] = str_replace('\\n', ' ', $row[$i]);
-                  }
-                  echo "<td>$row[$i]</td>";
-              } ?>
-              <td>
-                <button type="button" class="btn btn-primary">Accepter</button>
-                <button type="button" class="btn btn-danger">Refuser</button>
-              </td>
+              <form action="" method="POST">
+                <input type="hidden" name="id_row" value=<?="$row[0]";?>>
+                <?php for($i=1; $i<$nb_champs1; $i++ ){
+                    if ($i==6){
+                      $row[$i] = str_replace('\\n', ' ', $row[$i]);
+                    }
+                    echo "<td>$row[$i]</td>";
+                } ?>
+                <td>
+                  <input type="submit" name="accepter_bouton" class="btn btn-primary" value="accepter">
+                  <input type="submit" name="refuser_bouton" class="btn btn-danger" value="refuser">
+                </td>
+              </form>
             </tr>
         <?php endwhile; ?>
         </tbody>
@@ -70,6 +98,29 @@ $nb_champs2 = mysqli_field_count($link);
       </div>
   </div>
 </div>
+
+ <?php /* free result set */
+    mysqli_free_result($result_modification);
+
+    /* close connection */
+    mysqli_close($link); 
+
+  //requete affichage création évènement
+
+  $link = mysqli_connect($hostname, $username, $password, $db);
+
+  /* check connection */
+  if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+  exit();
+  }
+
+
+  $requete_creation_sql = "SELECT modification.identifiant,utilisateur.identifiant, modification.nomEvent, modification.descriptionEvent, modification.dateEvent, modification.enseignantEvent, modification.salleEvent, modification.heureDebut, modification.heureFin, modification.groupeEvent FROM utilisateur, modification WHERE (modification.identifiantUtilisateur LIKE utilisateur.identifiant) and modification.type = 1";
+  $result_creation = mysqli_query($link, $requete_creation_sql);
+  $nb_champs2 = mysqli_field_count($link);
+
+?>
 
 <h1>Demandes de création d'évènement </h1>
 <div class="container">
@@ -83,7 +134,6 @@ $nb_champs2 = mysqli_field_count($link);
             <th scope="col">Description</th>
             <th scope="col">Date</th>
             <th scope="col">Enseignant </th>
-            <th scope="col">Description</th>
             <th scope="col">Salle</th>
             <th scope="col">Heure début</th>
             <th scope="col">Heure fin</th>
@@ -92,26 +142,28 @@ $nb_champs2 = mysqli_field_count($link);
           </tr>
         </thead>
         <tbody>
-          <?php while($row = mysqli_fetch_array($result_modification, MYSQLI_NUM)): ?>
+        <?php while($row = mysqli_fetch_array($result_creation, MYSQLI_NUM)): ?>
+         <form action="" method="POST">
+            <input type="hidden" name="id_row" value=<?="$row[0]";?>>
             <tr>
-              <?php for($i=0; $i<$nb_champs2; $i++ ){
-                  echo "<td>$row[$i]</td>";
-              } ?>
-              <td>
-                <button type="button" class="btn btn-primary">Accepter</button>
-                <button type="button" class="btn btn-danger">Refuser</button>
-              </td>
+                <?php for($i=1; $i<$nb_champs2; $i++ ){
+                    echo "<td>$row[$i]</td>";
+                } ?>
+                <td>
+                  <input type="submit" name="accepter_bouton" class="btn btn-primary" value="accepter">
+                  <input type="submit" name="refuser_bouton" class="btn btn-danger" value="refuser">
+                </td>
             </tr>
+          </form>
         <?php endwhile; ?>
         </tbody>
       </table>
       </div>
   </div>
 
-<?php
-  /* free result set */
-  mysqli_free_result($result_event);
+ <?php /* free result set */
+    mysqli_free_result($result_modification);
 
-  /* close connection */
-  mysqli_close($link);
-?>
+    /* close connection */
+    mysqli_close($link); 
+  ?>
