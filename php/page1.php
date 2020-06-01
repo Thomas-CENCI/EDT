@@ -65,7 +65,10 @@ if(isset($_POST['accepter_creation_bouton'])){
         }
         $requete_ajout_evenement_sql = "INSERT INTO events(DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION) VALUES ('$DTSTART', '$DTEND', '$SUMMARY', '$LOCATION', '$DESCRIPTION'); INSERT INTO events2salle(identifiantEvents, identifiantSalle) SELECT LAST_INSERT_ID(), salle.identifiant FROM salle WHERE salle.nom LIKE '$LOCATION';"; //on ajoute l'évènement dans les 2 tables
 
+        echo $requete_ajout_evenement_sql;
+
         $result_ajout_evenement = mysqli_query($link, $requete_ajout_evenement_sql);
+        echo "resultat : ". $result_ajout_evenement;
 
          /* free result set */
         mysqli_free_result($result_verifie_compatibilite);

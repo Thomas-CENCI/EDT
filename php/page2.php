@@ -39,9 +39,10 @@ if(isset($_POST["submit"])){
 <html>
 	<head>
 		<meta name=description content="Demande de création d'un événement">
+		<link rel="stylesheet" href="../css/page2.css"> <!-- il faudra changer avec la page0.css je pense -->
 	</head>
-	<div>
-		<form  method='POST' action='/EDT/php/edt_main.php?page=2'>
+	<div class="basic_form">
+		<form  method='POST' action='../php/edt_main.php?page=2'>
 
 			<div>
 				<label for='nom'>Evénement : </label></br>
@@ -88,3 +89,4 @@ if(isset($_POST["submit"])){
 		</form>
 	</div>
 </html>
+
