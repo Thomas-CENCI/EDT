@@ -35,48 +35,49 @@ if(isset($_POST["submit"])){
 <html>
 	<head>
 		<meta name=description content="Demande de création d'un événement">
-		<link rel="stylesheet" href="../css/page2.css"> <!-- il faudra changer avec la page0.css je pense -->
 	</head>
 	<div class="basic_form">
 		<form  method='POST' action='/EDT/php/edt_main.php?page=2'>
+
 			<div>
-				<label for='nom'>Evénement : </label>
-				<input type='text' name='nom' id='nom'/>
+				<label for='nom'>Evénement : </label></br>
+				<input type='text' name='nom' id='nom' class='form-control'/></br>
+			</div>
+
+			<div>
+				<label for='enseignant'>Enseignant : </label></br>
+				<input type='text' name='enseignant' id='enseignant' class='form-control'/></br>
 			</div>
 			<div>
-				<label for='enseignant'>Enseignant : </label>
-				<input type='text' name='enseignant' id='enseignant'/>
+				<label for='groupe'>Groupe(s) : </label></br>
+				<input type='text' name='groupe' id='groupe' class='form-control'/></br>
 			</div>
 			<div>
-				<label for='groupe'>Groupe(s) : </label>
-				<input type='text' name='groupe' id='groupe'/>
+				<label for='date'>Date : </label></br>
+				<input type='date' name='date' id='date' class='form-control'/></br>
 			</div>
 			<div>
-				<label for='date'>Date : </label>
-				<input type='date' name='date' id='date'/>
-			</div>
-			<div>
-			  	<label for="salle">Salle : </label>
+			  	<label for="salle">Salle : </label></br>
 				<select class="form-control"  id="salle" name="salle">
 					<?php foreach($requete_salle as $salle){echo "<option  value='".$salle['nom']."'>".$salle['nom']."</option>";} ?>
 				</select>
 			</div>
 			<div>
-				<label for='hd'>Début : </label>
-				<input type='time' name='hd' id='hd'/>
+				</br><label for='hd'>Début : </label></br>
+				<input class='form-control' type='time' name='hd' id='hd'/></br>
 			</div>
 			<div>
-				<label for='hf'>Fin : </label>
-				<input type='time' name='hf' id='hf'/>
+				<label for='hf'>Fin : </label></br>
+				<input class='form-control' type='time' name='hf' id='hf'/></br>
 			</div>
 			<div>
-				<label for='description'>Description :</label>
-				<input type='text' name='description' id='description'/>
+				<label for='description'>Description :</label></br>
+				<input class='form-control' type='text' name='description' id='description'/></br>
 		  	</div>
-		  	<div class="button">
-				<button class="btn btn-secondary" name="submit" type="submit" value="Valider">Valider</button>
+
+		  	<div class="modal-footer">
+				<button class="btn btn-primary" name="submit" type="submit" value="Valider">Valider</button>
 			</div>
 		</form>
 	</div>
 </html>
-
