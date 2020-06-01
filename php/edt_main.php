@@ -1,12 +1,6 @@
 <?php
 	session_start();
-	if(isset($_SESSION['status'])){
-	$status = $_SESSION['status'];}
-	else{
-		 header ('Location: edt_connexion.php');
-	}
-
-
+	$status = $_SESSION['status'];
 	if( !isset($_GET["page"]) ) { 
         $page=0;
       }else{
@@ -50,7 +44,7 @@
 
 	  		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		   		<ul class="navbar-nav mr-auto">
-		      		<?php echo "<li class=\"nav-item $active[0]\">"; ?> <!-- peut être à changer le 0 en 4 -->
+		      		<?php echo "<li class=\"nav-item $active[0]\">"; ?>
 		        		<a class="nav-link" href="?page=0">Emploi du temps</a>
 		     		</li>
 		     		<?php if($status == "admin"): ?>
@@ -60,7 +54,7 @@
 		      			<?php echo "<li class=\"nav-item $active[2]\">"; ?>
 			        		<a class="nav-link" href="?page=2">Demandes de cours</a> <!-- affiche toutes les demandes à traiter -->
 			      		</li>
-			      	<?php elseif($status == "enseignant"): ?>
+			      	<?php elseif($status == "enseignant" || $status =="etudiant"): ?>
 		      			<?php echo "<li class=\"nav-item $active[3]\">"; ?>
 			        		<a class="nav-link" href="?page=3">Demander des cours</a> <!-- Demander à l'damin d'ajouter, de supprimer ou de modifier des cours  -->
 			      		</li>
