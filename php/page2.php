@@ -22,14 +22,10 @@ if(isset($_POST["submit"])){
 	$dateD = $_POST["date"]." ".$heureDebut.":00";
 	$dateF = $_POST["date"]." ".$heureFin.":00";
 
-<<<<<<< HEAD
+
 	$SQL = "INSERT INTO modification (type, identifiantUtilisateur, nomEvent, enseignantEvent, salleEvent, groupeEvent, descriptionEvent,dateEventD,dateEventF)
 			VALUES (1,'".$_SESSION['login']."', '".$nom."', '".$enseignant."', '".$salle."', '".$groupe."', '".$description."','".$dateD."','".$dateF."')";
-=======
 
-	$SQL = "INSERT INTO modification (identifiantUtilisateur, type, nomEvent, dateEvent, enseignantEvent, salleEvent, heureDebut, heureFin, groupeEvent, descriptionEvent)
-			VALUES ('".$_SESSION['login']."', 1, '".$nom."', '".$date."', '".$enseignant."', '".$salle."', '".$heureDebut."', '".$heureFin."', '".$groupe."', '".$description."')";
->>>>>>> 671a73adb6ba9b7d29a4eea48b5e2333ff5b03ed
 	mysqli_query($conn, $SQL);
 }
 
