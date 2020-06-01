@@ -18,7 +18,7 @@ if(isset($_POST["submit"])){
 	$date = $_POST["date"];
 	$heureDebut = $_POST["hd"];
 	$heureFin = $_POST["hf"];
-	$description = $_POST["description"]
+	$description = $_POST["description"];
 
 
 	$SQL = "INSERT INTO modification (type, nomEvent, dateEvent, enseignantEvent, salleEvent, heureDebut, heureFin, groupeEvent, descriptionEvent)
