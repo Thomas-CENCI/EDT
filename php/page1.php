@@ -23,7 +23,7 @@ if(isset($_POST['refuser_bouton'])){ // quand on refuse une demande
   
   /* close connection */
   mysqli_close($link);
-  echo "<div class=\"alert alert-success\" role=\"alert\">Demande supprimé.</div>";
+  echo "<div class=\"alert alert-success\" role=\"alert\">Demande supprimée.</div>";
 
 }
 
@@ -94,7 +94,7 @@ if(isset($_POST['accepter_creation_bouton'])){
       
       /* close connection */
         mysqli_close($link);
-        echo "<div class=\"alert alert-success\" role=\"alert\">Demande accepter.</div>";
+        echo "<div class=\"alert alert-success\" role=\"alert\">Demande acceptée.</div>";
     }else{
         echo "<div class=\"alert alert-danger\" role=\"alert\">Demande impossible.</div>";
 
