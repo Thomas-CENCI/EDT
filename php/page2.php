@@ -8,11 +8,14 @@ $conn = new mysqli($hostname, $username, $password, $db) or die('Error connectin
 
 $SQL_salle = "SELECT salle.nom FROM salle";
 $SQL_enseignant = "SELECT utilisateur.nom, utilisateur.prenom FROM utilisateur WHERE utilisateur.type = 2";
+$SQL_groupe = "SELECT groupe.nom FROM groupe";
 
 $response_salle = mysqli_query($conn, $SQL_salle);
 $requete_salle = mysqli_fetch_all($response_salle, MYSQLI_ASSOC);
 $response_enseignant = mysqli_query($conn, $SQL_enseignant);
 $requete_enseignant = mysqli_fetch_all($response_enseignant, MYSQLI_ASSOC);
+$response_groupe = mysqli_query($conn, $SQL_groupe);
+$requete_groupe = mysqli_fetch_all($response_groupe, MYSQLI_ASSOC);
 
 if(isset($_POST["submit"])){
 	$nom = $_POST["nom"];
@@ -31,6 +34,8 @@ if(isset($_POST["submit"])){
 			VALUES (1,'".$_SESSION['login']."', '".$nom."', '".$enseignant."', '".$salle."', '".$groupe."', '".$description."','".$dateD."','".$dateF."')";
 
 	mysqli_query($conn, $SQL);
+
+	echo "<div class='alert alert-success' role='alert'>Demande envoyée</div>";
 }
 
 ?>
@@ -55,8 +60,10 @@ if(isset($_POST["submit"])){
 				</select>
 			</div>
 			<div>
-				<label for='groupe'>Groupe(s) : </label></br>
-				<input type='text' name='groupe' id='groupe' class='form-control'/></br>
+			  	<label for="groupe">Groupe : </label></br>
+				<select class="form-control"  id="groupe" name="groupe">
+					<?php foreach($requete_groupe as $groupe){echo "<option  value='".$groupe['nom']."'>".$groupe['nom']."</option>";} ?>
+				</select>
 			</div>
 			<div>
 				<label for='date'>Date : </label></br>
