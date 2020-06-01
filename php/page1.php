@@ -29,7 +29,6 @@ $nb_champs2 = mysqli_field_count($link);
 
 <head>
   <meta name=description content="Gestion de cours - ADMIN"> <!-- il voit une liste de demandes de modification et peu accepter ou nom la demande -->
-  <link href="../css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <h1>Demandes de modifications d'évènement </h1>

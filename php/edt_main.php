@@ -28,8 +28,8 @@
 		<title>EDT</title>
 		<meta content="info">
     	<meta charset="UTF-8"> 
-    	<link href="../css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    	<link href="../css/edt_main.css" rel="stylesheet">
+		<link href="../css/edt_main.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -59,7 +59,6 @@
 			      	<li class="nav-item dropdown">
 			        		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">⚙️</a>
 			      			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          						<a class="dropdown-item" href="#">aide</a>
           						<a class="dropdown-item" href="?deconnexion=true">Déconnexion</a>
         					</div>
 			      		</li>

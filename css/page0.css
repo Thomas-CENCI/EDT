@@ -1,76 +1,41 @@
-caption /* Titre du tableau */
-{
-   margin: auto; /* Centre le titre du tableau */
-   /*font-family: Arial, Times, "Times New Roman", serif;*/
-   font-weight: bold;
-   font-size: 1.2em;
-   color: #009900;
-   margin-bottom: 20px;
+.table {
+  font-size: 11px;
 }
 
-table /* Le tableau en lui-même */
-{
-   margin: auto;
-   border: 4px outset green;
-   border-collapse: collapse;
-   width:100%;
-}
-th /* Les cellules d'en-tête */
-{
-   background-color: #006600;
-   color: white;
-   font-size: 1.1em;
-   /*font-family: Arial, "Arial Black", Times, "Times New Roman", serif;*/
-   border:1px solid red;
-   text-align: center;
+.full-hour {
+	border-top: 1px solid lightgrey;
 }
 
-td /* Les cellules normales */
-{
-   border: 1px solid black;
-   /*font-family: "Comic Sans MS", "Trebuchet MS", Times, "Times New Roman", serif;*/
-   text-align: center;
-   padding: 0px;
-}
-td.time
-{
-    width:5%;
-    border:1px solid white;
-    text-align: right;
-}
-
-td.content{
+.table tr td {
+	height: 15px;
+	width: 150px;
+	border: none;
+	text-align: center;
+	vertical-align: top;
+	color: grey;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
-.truc{
-  background-color: red;
+.table tr td div {
+    background-color: lightblue;
+    overflow-y: auto;
+   	border-radius: 0.5em;
+	vertical-align: middle;
 }
 
-.truc_jaune{
-  background-color: yellow;
+.table-div {
+  overflow-y: auto;
 }
 
-div.jour{
-  padding-left: 0px;
+.table-div th {
+  position: sticky;
+  top: 0;
 }
 
-table#heure td{
-  border : 1px solid white;
-  text-align: right; 
+.table thead, .table tbody, .table tbody tr {
+    width: 100%;
+    table-layout: auto;
 }
-div.heure_content{
-  position:relative;
-  top:11px;
-}
-
-div.derniere-heure{
-  position:relative;
-  top:5px;
-}
-
-div.premiere-heure{
-  position:relaitve;
-  top:0px;
-}
-
-</style>

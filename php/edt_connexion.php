@@ -103,21 +103,18 @@
                                     <img src="../image/1.jpg" class="d-block w-100" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Bienvenue sur votre site d'emploi du temps</h5>
-                                        <p>Vulnerant omnes, ultima necat</p>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
                                     <img src="../image/2.jpg" class="d-block w-100" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Consultez votre emploie du temps</h5>
-                                        <p>Vulnerant omnes, ultima necat</p>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
                                     <img src="../image/3.jpg" class="d-block w-100" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Planifiez vos activités</h5>
-                                        <p>Vulnerant omnes, ultima necat</p>
                                     </div>
                                 </div>
                             </div>

@@ -4,7 +4,7 @@
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>--> <!-- il faut enlever car déjà importer dans main -->
-		<link rel="stylesheet" href="../css/page4.css"> <!-- il faudra changer avec la page0.css je pense -->
+		<link rel="stylesheet" href="../css/page0.css"> <!-- il faudra changer avec la page0.css je pense -->
 	</head>
 
 	<body>
@@ -130,7 +130,7 @@
 		var current_week = ISO8601_week_no(addDays(0, numWeeks));
 		var php_array = <?php echo json_encode($res); ?>;
 
-		function reset_tbody(){$('#table_body').html(<?php echo json_encode(create_tablebody()); ?>);}
+		function reset_tbody(){$('#table_body').html(<?php echo json_encode(create_tablebody()); ?>);}//Reset du contenu de la table
 
 		function display_events(){
 			reset_tbody();
@@ -146,7 +146,7 @@
 
 				var description = description.replace("IDU"," ")
 
-				var nb_rows = quarters_np(dtstart, dtend);
+				var nb_rows = quarters_np(dtstart, dtend);//Nombre de balises td
 				var week_date = ISO8601_week_no(new Date(dtstart));
 
 				if (week_date == current_week){
@@ -167,10 +167,14 @@
 		}
 
 		function first_event(){
+			//Renvoie le premier évènement trouvé dans le tableau
 			return $('td>div:not(:empty):first').attr('id');
 		}
 
 		function delete_td(id, id_day, nb_rows){
+			/*
+				Supprime le nombre de td correspondant à la place nécessaire pour le rowspan
+			*/
 				var i = 0;
 				var current_td = $('#'+id).parent();
 
@@ -187,6 +191,9 @@
 		}
 
 		function quarters_np(dtstart, dtend){
+			/*
+				Renvoie le nombre de quarts d'heure contenu dans l'évènement -> correspond au nombre de balises td
+			*/
 			var tstart = new Date(dtstart);
 			var tend = new Date(dtend);
 
@@ -197,6 +204,7 @@
 		}
 
 		function ISO8601_week_no(dt) {
+			//Renvoie la semaine actuelle
 			 var tdt = new Date(dt.valueOf());
 			 var dayn = (dt.getDay() + 6) % 7;
 			 tdt.setDate(tdt.getDate() - dayn + 3);
@@ -222,20 +230,21 @@
 
 		document.getElementById('btn+').onclick = function() {
 			numWeeks += 1;
-			current_week = ISO8601_week_no(addDays(0, numWeeks));
+			current_week = ISO8601_week_no(addDays(0, numWeeks));//Ajout d'une semaine
 			update_table();
 		}
 
 		document.getElementById('btn-').onclick = function() {
 			numWeeks += -1;
-			current_week = ISO8601_week_no(addDays(0, numWeeks));
+			current_week = ISO8601_week_no(addDays(0, numWeeks));//Retrait d'une semaine
 			update_table();
 		}
 
 	$('.table').click(function(){
-		$('div[id^=div-]').click(function(){
-			var children = $(this).children('div');
+		$('div[id^=div-]').click(function(){//Clic sur une div d'event
+			var children = $(this).children('div');//Récupération de l'ensemble des fils de la div
 			$("#EventModal").modal('show');
+			//Input values = div values
 			$('input[id=event_summary]').val( $(children[0]).text() );
 			$('input[id=event_dtstart]').val( $(children[1]).text() );
 			$('input[id=event_dtend]').val( $(children[2]).text() );
