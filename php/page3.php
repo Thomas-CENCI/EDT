@@ -18,10 +18,11 @@ if(isset($_POST["submit"])){
 	$date = $_POST["date"];
 	$heureDebut = $_POST["hd"];
 	$heureFin = $_POST["hf"];
+	$description = $_POST["description"]
 
 
-	$SQL = "INSERT INTO modification (type, nomEvent, dateEvent, enseignantEvent, salleEvent, heureDebut, heureFin, groupeEvent)
-			VALUES (1, '".$nom."', '".$date."', '".$enseignant."', '".$salle."', '".$heureDebut."', '".$heureFin."', '".$groupe."')";
+	$SQL = "INSERT INTO modification (type, nomEvent, dateEvent, enseignantEvent, salleEvent, heureDebut, heureFin, groupeEvent, descriptionEvent)
+			VALUES (1, '".$nom."', '".$date."', '".$enseignant."', '".$salle."', '".$heureDebut."', '".$heureFin."', '".$groupe."', '".$description."')";
 	mysqli_query($conn, $SQL);
 }
 
@@ -96,6 +97,13 @@ if(isset($_POST["submit"])){
 				echo "<label for='hf'>Heure de fin : </label>";
 				echo "<input type='time' name='hf' id='hf'/>";
 				// date_create_from_format ( "H:i" , $heureFin [, DateTimeZone "e" ] ) : DateTime // Pas sur de cette conversion
+	    	?>
+	  	</div>
+
+	  	<div style="position:relative; border-spacing: 10px">
+			<?php
+				echo "<label for='description'>Description : </label>";
+				echo "<input type='text' name='description' id='description'/>";
 	    	?>
 	  	</div>
 
