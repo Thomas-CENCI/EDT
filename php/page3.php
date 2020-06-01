@@ -1,5 +1,5 @@
 <head>
-	<meta name=description content="Demande d'un évennement - ENSEIGNANT">
+	<meta name=description content="Demande de création d'un évennement">
 	<link href="../css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -11,14 +11,18 @@ $password="ItBWtR3xM5";
 $db="sql7336475";
 $conn = new mysqli($hostname, $username, $password, $db) or die('Error connecting to database');
 
-$SQL_enseignant = "SELECT identifiant FROM user WHERE type LIKE 'type de l'enseignant";
-$requete_enseignant = mysqli_query($conn, $SQL_enseignant);
-
-$SQL_salle = "SELECT identifiant FROM salles";
+$SQL_salle = "SELECT salles.nom FROM salles";
 $requete_salle = mysqli_query($conn, $SQL_salle);
 
-$SQL_groupe = "SELECT identifiant FROM groupe";
-$requete_groupe = mysqli_query($conn, $SQL_groupe);
+// if isset $_POST("submit"){
+	// $nom
+	// $date
+	// $enseignant
+	// $salle
+	// $heureFin
+	// $heureDebut
+	// $groupe
+// }
 
 ?>
 
@@ -30,41 +34,49 @@ $requete_groupe = mysqli_query($conn, $SQL_groupe);
 		<link rel='stylesheet' href='page3.css'>
 	</head>
 	<div>
-		<form id='data' action='page1.php' method='GET'>
+		<form id='data' method='POST'>
 			<div>
-				<div style="float:left">
+				<div style="float:left; border-spacing: 10px">
 
 					<?php
-						echo("<form method='post' action='#'>
-								<p> Nom de l'évennement <input name='nom' id='name'/></p>
-							  </form>");
-						$nom = $_POST['nom']
+						echo("<form method='POST'><p> Nom de l'évennement <input name='nom' id='name'/></p></form>");
+						if(isset($_POST["nom"])){
+							$nom = $_POST["nom"];
+						}
 			    	?>
 
 			  	</div>
 
-				<div style="float:right">
+			  	<div style="float:left; border-spacing: 10px">
 
 					<?php
-						echo('<form method="post" action="#">
-								<p> Date <input type="date" name="date" id="dd"/></p>
-							  </form>');
-
-						$date = $_POST['date'];
+						echo("<form method='POST'><p> Nom de l'enseignant <input name='enseignant' id='enseignant'/></p></form>");
+						if(isset($_POST['enseignant'])){
+							$enseignant = $_POST["enseignant"];
+						}
 			    	?>
 
 			  	</div>
 
-				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			    	Nom de l'enseignant
-			  	</button>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			  	<div style="float:left; border-spacing: 10px">
 
 					<?php
-			    	while($data_enseignant = mysqli_fetch_array($requete_enseignant)){
-						$enseignant = $data_enseignant['nom'];
-						echo("<button class = 'dropdownitem' type = 'submit'> ".$enseignant." </button>");
-					}
+						echo("<form method='POST'><p> Groupe(s) concerné(s) <input name='groupe' id='groupe'/></p></form>");
+						if(isset($_POST['groupe'])){
+							$groupe = $_POST["groupe"];
+						}
+			    	?>
+
+			  	</div>
+
+				<div style="float:left; border-spacing: 10px">
+
+					<?php
+						echo("<form method='POST'><p> Date <input type='date' name='date' id='date'/></p></form>");
+						if(isset($_POST["date"])){
+							$date = $_POST["date"];
+						}
+						// date_create_from_format ( "d/m/Y" , $date [, DateTimeZone "e" ] ) : DateTime // Pas sur de cette conversion
 			    	?>
 
 			  	</div>
@@ -72,58 +84,45 @@ $requete_groupe = mysqli_query($conn, $SQL_groupe);
 				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			    	Nom de la salle
 			  	</button>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="float:left; border-spacing: 10px">
 
 					<?php
 			    	while($data_sale = mysqli_fetch_array($requete_salle)){
-						$salle = $data_salle['nom'];
+			    		if(isset($_POST["salle"])){
+							$salle = $data_salle['salle'];
+			    		}
 						echo("<button class = 'dropdownitem' type = 'submit'> ".$salle." </button>");
 					}
 			    	?>
 
 			  	</div>
 
-				<div style="float:right">
+			  	<div style="float:left; border-spacing: 10px">
 
 					<?php
-						echo('<form method="post" action="#">
-								<p>  
-									Heure de fin <input type="time" name="hf">
-								</p>
-						</form>');
-						$heureFin = $_POST['hf'];
+						echo('<form method="POST"><p> Heure de début <input type="time" name="hd"/></p></form>');
+						if(isset($_POST['hd'])){
+							$heureDebut = $_POST["hd"];
+						}
+						// date_create_from_format ( "H:i" , $heureDebut [, DateTimeZone "e" ] ) : DateTime // Pas sur de cette conversion
 			    	?>
 
 			  	</div>
 
-				<div style="float:right">
+				<div style="float:left; border-spacing: 10px">
 
 					<?php
-						echo('<form method="post" action="#">
-								<p>  
-									Heure de début <input type="time" name="hd">
-								</p>
-						</form>');
-						$heureDebut = $_POST['hd'];
+						echo("<form method='POST'><p> Heure de fin <input type='time' name='hf'/></p></form>");
+						if(isset($_POST["hf"])){
+							$heureFin = $_POST["hf"];
+						}
+						// date_create_from_format ( "H:i" , $heureFin [, DateTimeZone "e" ] ) : DateTime // Pas sur de cette conversion
 			    	?>
 
 			  	</div>
 
-				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			    	Groupe(s) concerné(s)
-			  	</button>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-					<?php
-			    	while($data_groupe = mysqli_fetch_array($requete_groupe)){
-						$groupe = $data_groupe['nom'];
-						echo("<button class = 'dropdownitem' type = 'submit'> ".$salle." </button>");
-					}
-			    	?>
-
-			  	</div>
 			</div>
-			<p><input type="submit" value="Valider" style="float: right; width: 25%;"></p>
+			<p><input name = "submit" type="submit" value="Valider" style="float: right; width: 25%;"></p>
 		</form>
 	</div>
 </html>
