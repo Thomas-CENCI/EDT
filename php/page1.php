@@ -23,7 +23,7 @@ if(isset($_POST['refuser_bouton'])){ // quand on refuse une demande
   
   /* close connection */
   mysqli_close($link);
-  echo "<div class=\"alert alert-success\" role=\"alert\">Demande supprimée.</div>";
+  echo "<div class=\"alert alert-success\" role=\"alert\">Demande supprimée</div>";
 
 }
 
@@ -94,9 +94,9 @@ if(isset($_POST['accepter_creation_bouton'])){
       
       /* close connection */
         mysqli_close($link);
-        echo "<div class=\"alert alert-success\" role=\"alert\">Demande acceptée.</div>";
+        echo "<div class=\"alert alert-success\" role=\"alert\">Demande acceptée</div>";
     }else{
-        echo "<div class=\"alert alert-danger\" role=\"alert\">Demande impossible.</div>";
+        echo "<div class=\"alert alert-danger\" role=\"alert\">Demande impossible</div>";
 
     }
 }
@@ -108,7 +108,7 @@ if(isset($_POST['accepter_creation_bouton'])){
   <meta name=description content="Gestion de cours - ADMIN"> <!-- il voit une liste de demandes de modification et peu accepter ou nom la demande -->
 </head>
 
-<h1>Demandes de modifications d'évènement </h1>
+<h1>Demandes de modification d'évènement </h1>
 
 <?php 
 
@@ -139,9 +139,9 @@ if(isset($_POST['accepter_creation_bouton'])){
             <th scope="col">Heure fin</th>
             <th scope="col">Localisation</th>
             <th scope="col">Description</th>
-            <th scope="col">nouvelle salle</th>
-            <th scope="col">nouvelle date début</th>
-            <th scope="col">nouvelle date fin</th>
+            <th scope="col">Nouvelle salle</th>
+            <th scope="col">Nouvelle date début</th>
+            <th scope="col">Nouvelle date fin</th>
             <th scope="col">Choix</th>
           </tr>
         </thead>
