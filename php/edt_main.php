@@ -1,6 +1,12 @@
 <?php
 	session_start();
-	$status = $_SESSION['status'];
+	if(isset($_SESSION['status'])){
+	$status = $_SESSION['status'];}
+	else{
+		 header ('Location: edt_connexion.php');
+	}
+
+
 	if( !isset($_GET["page"]) ) { 
         $page=0;
       }else{
