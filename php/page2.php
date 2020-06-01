@@ -33,7 +33,7 @@ if(isset($_POST["submit"])){
 	<head>
 		<meta name=description content="Demande de création d'un événement">
 	</head>
-	<form  method='POST' action='/EDT/php/edt_main.php?page=3'>
+	<form  method='POST' action='/EDT/php/edt_main.php?page=2'>
 	  	<div style="position:relative; border-spacing: 10px">
 
 			<?php
