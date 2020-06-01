@@ -62,17 +62,18 @@
 
 								<label class="col-form-label" for="event_description" style="display:none;" >Description </label>
 								<input class="form-control" type="text" id="event_description" value="" placeholder="Description" style="display:none;">
-							</form>
-						</div>
-					</div>
-					<div class="modal-footer">
+
+						<div class="modal-footer">
 						
-						<button id="edit_event_submit" type="button" class="btn btn-primary" name="edit_event_submit">Modifier</button>
-						<button id = "del" type="button" class="btn btn-primary" name="del">Supprimer </button>
-					
+						<button id="edit_event_submit" type="submit" class="btn btn-primary" name="edit_event_submit" value="1">Modifier</button>
+						<button id = "del" type="submit" class="btn btn-primary" name="del",value ="2">Supprimer </button>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
 
 					</div>
+							</form>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
