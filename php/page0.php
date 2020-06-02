@@ -40,7 +40,7 @@
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<form id="edit_event_form" method="POST" action="/EDT/php/edit_event.php">
+							<form id="edit_event_form" method="POST" action="../php/edit_event.php">
 								<label class="col-form-label" for="event_id_event">Id </label>
 								<input class="form-control" type="text" id="event_id_event" value="" name="id" placeholder="Id" readonly/>
 								
