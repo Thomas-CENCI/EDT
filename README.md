@@ -9,7 +9,7 @@ Voici les comptes  :<br/>
 Administarteur<br/>
  identifiant : vieuL<br/>
  mots de passe : mdploic<br/>
- <br/><br/>
+ <br/>
 Professeur <br/>
  identifiant : sebastienM<br/>
  mots de passe : mdpSebastien<br/>
