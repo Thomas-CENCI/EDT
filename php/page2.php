@@ -44,7 +44,7 @@ if(isset($_POST["submit"])){
 <html>
 	<head>
 		<meta name=description content="Demande de création d'un événement">
-		<link rel="stylesheet" href="../css/page2.css"> <!-- il faudra changer avec la page0.css je pense -->
+		<link rel="stylesheet" href="../css/page2.css">
 	</head>
 	<div class="basic_form">
 		<form  method='POST' action='../php/edt_main.php?page=2'>
