@@ -1,10 +1,6 @@
 <html>
 	<head>
-		<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>--> <!-- il faut enlever car déjà importer dans main -->
-		<link rel="stylesheet" href="../css/page0.css"> <!-- il faudra changer avec la page0.css je pense -->
+		<link rel="stylesheet" href="../css/page0.css">
 	</head>
 
 	<body>
