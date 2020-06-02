@@ -9,6 +9,7 @@ Il s'agit pour ce projet de concevoir et mettre en place une application web qui
 ## Installation du site web
 La base de données est hébergée par un service cloud, des soucis de connexion sont possibles.
 Dans le cas où le service cloud ne serait pas disponible, une restauration de base est possible à partir du dump présent.
+
 *Remarque : Les identifiants de connexion devront être modifiés dans le code*
 
 Il est recommandé d'utiliser Mamp (MacOS), WampServer (Windows) pour exécuter le site.
@@ -19,7 +20,7 @@ Accédez à l'adresse suivante :  [cliquez-ici](http://localhost/edt/php/edt_mai
 Une authentification est nécessaire pour accéder aux différents services. Des fonctionnalités différentes sont proposées en fonction du rôle de l'utilisateur.
 
 ### Comptes disponibles :
-|                |                |                |                 | 
+|                |                |                |                 |
 |----------------|----------------|----------------|----------------|
 |**Identifiant**|vieuL | sebastienM | thomasC |
 |**Mot de passe**| mdpLoic | mdpSebastien | mdpThomas
