@@ -1,8 +1,8 @@
 # Instalation du site web
-La base de données utilisées est hébergée par un cloud gratuit, il y a donc quelques problèmes pour se connecter en fin de journée.
+La base de données utilisée est hébergée par un cloud gratuit, il y a donc quelques problèmes pour se connecter en fin de journée.
 
 Une fois le code installée en local la page de connextion est la suivante :
-http://localhost/edt/php/edt_connexion.php
+http://localhost/edt/php/edt_main.php
 
 Voici les comptes  :<br/>
 
