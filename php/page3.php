@@ -16,8 +16,6 @@
 	$requete_event_sql = "SELECT DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION, id FROM events WHERE (DTSTART LIKE '%$requete%') OR (DTEND LIKE '%$requete%') OR (SUMMARY LIKE '%$requete%') OR (LOCATION LIKE '%$requete %') OR (DESCRIPTION LIKE '%$requete%')";
 	$result_event = mysqli_query($link, $requete_event_sql);
 
-	// est ce qu'il faut aussi faire les recherches sur les salles, groupres et utilisateur ??
-
 
 ?>
 
