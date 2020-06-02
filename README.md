@@ -4,20 +4,20 @@ La base de données utilisées est hébergée par un cloud gratuit, il y a donc 
 Une fois le code installée en local la page de connextion est la suivante :
 http://localhost/edt/php/edt_connexion.php
 
-Voici les comptes  :
+Voici les comptes  :<br/>
 
-Administarteur
- identifiant : vieuL
- mots de passe : mdploic
- 
-Professeur 
- identifiant : sebastienM
- mots de passe : mdpSebastien
- 
-Elève 
- identifiant : thomasC
- mots de passe : mdpThomas
-
+Administarteur<br/>
+ identifiant : vieuL<br/>
+ mots de passe : mdploic<br/>
+ <br/><br/>
+Professeur <br/>
+ identifiant : sebastienM<br/>
+ mots de passe : mdpSebastien<br/>
+ <br/>
+Elève <br/>
+ identifiant : thomasC<br/>
+ mots de passe : mdpThomas<br/>
+<br/>
 
 
 # EDT
