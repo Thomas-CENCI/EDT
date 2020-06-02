@@ -34,12 +34,8 @@
             $requete_sql = "SELECT identifiant, motsDePasse, type FROM utilisateur WHERE identifiant LIKE '" . $_POST['login'] . "'";
             $result = mysqli_query($link, $requete_sql);
             $row = mysqli_fetch_array($result, MYSQLI_NUM);
-            /*
-             $requete_sql="SELECT motsDePasse FROM utilisateur WHERE      identifiant LIKE '" . $_POST['login'] . "'";
-             $result = mysql_query($requete_sql) or die("Requête invalide: ". mysql_error()."\n".$requete_sql);
-             $data = mysql_fetch_row($result);*/
-            //echo $row[0] . " ". $row[1]. " ".$row[2];
-            //echo "password : " . $_POST['password'];
+
+
             if($row[1]==$_POST['password']){
                 $_SESSION['login']=$_POST['login'];
                 $_SESSION['password']=$_POST['password'];
@@ -79,7 +75,7 @@
     <body>
         <div class="vertical-center">
             <div class="container">
-            <!-- Alert message if didn't success to sign in -->
+            <!-- Alert message si pas réussi à se connecter -->
                 <?php if (isset($acces_denied)): ?>
                     <div class="row justify-content-center">
                         <div class="col-4">
@@ -143,9 +139,6 @@
                                 <div class="form-group">
                                     Entrez votre nom d'utilisateur et votre mot de passe puis cliquez sur le bouton Connexion ci-dessous pour continuer.
                                 </div>
-                                <!-- <?php if (isset($acces_denied)): ?> -->
-                                <!-- <div id="msg_error">Le nom d'utilisateur ou le mot de passe est incorrect, veuillez réessayer </div> -->
-                                <!-- <?php endif; ?> -->
                                 <div class="form-group form-bottom">
                                     <input type="submit"  class="form-control btn btn-outline-primary" name="connexion_bouton" value="Connexion">
                                 </div>
