@@ -19,7 +19,7 @@ Accédez à l'adresse suivante :  [cliquez-ici](http://localhost/edt/php/edt_mai
 Une authentification est nécessaire pour accéder aux différents services. Des fonctionnalités différentes sont proposées en fonction du rôle de l'utilisateur.
 
 ### Comptes disponibles :
-
+|                |                |                |                 | 
 |----------------|----------------|----------------|----------------|
 |**Identifiant**|vieuL | sebastienM | thomasC |
 |**Mot de passe**| mdpLoic | mdpSebastien | mdpThomas
